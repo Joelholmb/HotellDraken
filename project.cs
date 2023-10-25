@@ -10,4 +10,3 @@ namespace nytthotell
         }
     }
 }
-aafaljgfagjpoagoåad
