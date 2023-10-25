@@ -1,19 +1,12 @@
-public class Book
-{
-    public string Title { get; set; }
-}
+using System;
 
-public class Program
+namespace nytthotell
 {
-    public static void Main()
+    class Program
     {
-        // Skapa en instans av Book med default-konstruktorn
-        Book book = new Book();
-
-        // Sätt egenskapen Title
-        book.Title = "The Great Gatsby";
-
-        // Nu har du en instans av Book med Title satt
-        Console.WriteLine($"Bokens titel är: {book.Title}");
+        public static void Main()
+        {
+            
+        }
     }
 }
