@@ -1,12 +1,13 @@
 using System;
 
-namespace nytthotell
+namespace hotelcsharp
 {
     class Program
     {
         public static void Main()
         {
-            
+           GuestList guestList = new GuestList();
+           guestList.PrintGuestList(); 
         }
     }
 }
