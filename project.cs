@@ -8,6 +8,9 @@ namespace hotelcsharp
         {
            GuestList guestList = new GuestList();
            guestList.PrintGuestList(); 
+
+           RoomList roomList = new RoomList();
+           roomList.PrintRoomList();
         }
     }
 }
