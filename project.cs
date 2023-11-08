@@ -8,7 +8,7 @@ namespace hotelcsharp
         {
             HotelManagement hotelManagement = new HotelManagement();
             hotelManagement.ChooseRole();
-            
+
             GuestList guestList = new GuestList();
             RoomList roomList = new RoomList();
 
@@ -16,7 +16,7 @@ namespace hotelcsharp
             {
 
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Ange numret på det rum du vill boka [1-3], avsluta bokningen med '0'.\n");
+                Console.WriteLine("Ange numret på det rum du vill boka [1-3]\n");
                 Console.ResetColor();
 
                 roomList.ListAvailableRooms();
@@ -43,10 +43,10 @@ namespace hotelcsharp
                 else
                 {
                     Console.WriteLine("Ogiltigt val. Försök igen.");
+                    Console.ReadLine();
                 }
             }     
-                
         }
+
     }
 }
-
