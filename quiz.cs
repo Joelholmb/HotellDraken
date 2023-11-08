@@ -1,7 +1,5 @@
-public class MyClass
+public class CostumersReview
 {
-    public static void Main()
-    {
         {
             System.Console.WriteLine("[1] Svar på frågorna om hotellet");
             System.Console.WriteLine("[2] Skriv frågor");
@@ -38,6 +36,5 @@ public class MyClass
                     break;
             }
         }
-    }
 }
 
