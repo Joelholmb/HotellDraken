@@ -18,8 +18,12 @@ namespace hotelcsharp
             Email = email;
             
         }
-        
-        
+        public override string ToString()
+        {
+            return Name;
+        }
+
+
 
     }
 }    
