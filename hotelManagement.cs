@@ -1,4 +1,4 @@
-namespace nytthotell
+namespace hotelcsharp
 {
 
     public class HotelManagement
