@@ -29,9 +29,29 @@ namespace hotelcsharp
 
         private void ManageGuest()
         {
-            
-            Console.WriteLine("Välkommen, gäst! Låt oss hjälpa dig med din vistelse.");
-            
+            Console.WriteLine("Välj vilken profil du vill logga in med:");
+            for (int i = 0; i < GuestList.guests.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {GuestList.guests[i]}");
+            }
+
+            if (int.TryParse(Console.ReadLine(), out int selectedGuestIndex))
+            {
+                selectedGuestIndex -= 1;
+                if (selectedGuestIndex >= 0 && selectedGuestIndex < GuestList.guests.Count)
+                {
+                    Guest chosenGuest = GuestList.guests[selectedGuestIndex];
+                    Console.WriteLine($"Välkommen {chosenGuest.Name}. Vad vill du göra?");
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Felaktig inmatning. Välj ett nummer från listan.");
+                    ManageGuest();
+                }
+            }
+           
+                
         }
 
         private void ManageEmployee()
