@@ -2,9 +2,9 @@ using System;
 
 namespace hotelcsharp
 {
-    internal class Program
+    internal class quiz
     {
-        static void quiz(string[] args)
+        
 
     }
 }

@@ -1,44 +1,52 @@
 namespace hotelcsharp
 {
-    bool isRunning = true;
-    while(isRunning)
+    class Menu
     {
-        Console.WriteLine("=========================")
-        Console.WriteLine("[B]oka ett rum.");
-        Console.WriteLine("Checka [i]n på ett hotellrum.");
-        Console.WriteLine("Checka [u]t från a hotellrum.");
-        Console.WriteLine("[A]vboka en bokning.");
-        Console.WriteLine("A[v]sluta.");
-        Console.WriteLine("Val: ");
-
-        string choice = Console.ReadLine();
-
-        switch (choice.ToLower())
+        public static void ShowMenu()
         {
-            case "b":
-            SystemCUI.Book();
-            break;
+    
+            bool isRunning = true;
+            while(isRunning)
+            {
+                Console.WriteLine("=========================");
+                Console.WriteLine("[B]oka ett rum.");
+                Console.WriteLine("Checka [i]n på ett hotellrum.");
+                Console.WriteLine("Checka [u]t från a hotellrum.");
+                Console.WriteLine("[A]vboka en bokning.");
+                Console.WriteLine("A[v]sluta.");
+                Console.WriteLine("Val: ");
 
-            case "i":
-            SystemCUI.CheckIn();
-            break;
+                string choice = Console.ReadLine();
 
-            case"u":
-            SystemCUI.CheckOut();
-            break;
+                switch (choice.ToLower())
+                {
+                    case "b":
+                    //SystemCUI.Book();
+                    break;
 
-            case"a":
-            SystemCUI.CancelBooking();
-            break;
+                    case "i":
+                    //SystemCUI.CheckIn();
+                    break;
 
-            case"v":
-            Console.WriteLine("Avsluta...");
-            isRunning = false;
-            break;
+                    case"u":
+                    //SystemCUI.CheckOut();
+                    break;
 
-            default:
-            Console.WriteLine("Jag förstår inte...");
-            break;
+                    case"a":
+                    //SystemCUI.CancelBooking();
+                    break;
+
+                    case"v":
+                    Console.WriteLine("Avsluta...");
+                    isRunning = false;
+                    break;
+
+                    default:
+                    Console.WriteLine("Jag förstår inte...");
+                    break;
+                
+                }
+            }
         }
     }
-}
+}       
