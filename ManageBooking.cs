@@ -33,7 +33,7 @@ namespace hotelcsharp
                     }
                     else
                     {
-                        Console.WriteLine($"Ogiltigt bokningsnummer eller rummet är inte bokats. Försök igen.");
+                        Console.WriteLine($"Ogiltigt bokningsnummer eller rummet är inte bokat. Försök igen.");
                     }
                 }
             }
