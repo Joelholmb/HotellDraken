@@ -9,8 +9,8 @@ namespace hotelcsharp
             HotelManagement hotelManagement = new HotelManagement();
             hotelManagement.ChooseRole();
 
-            BookRoom bookRoom = new BookRoom();
-            bookRoom.MakeBooking();
+            Menu.ShowMenu();
+
 
 
         }
