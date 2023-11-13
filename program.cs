@@ -4,14 +4,11 @@ namespace hotelcsharp
 {
     class Program
     {
-        public static void Main()
+        
+        static void Main(string[] args)
         {
             HotelManagement hotelManagement = new HotelManagement();
             hotelManagement.ChooseRole();
-
-            Menu.ShowMenu();
-
-
 
         }
 
