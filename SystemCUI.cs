@@ -2,53 +2,52 @@ namespace hotelcsharp
 {
     class Menu
     {
-        public static void ShowMenu()
+        private RoomList roomList = RoomList.GetInstance();
+
+        public void ShowGuestMenu()
         {
-    
             bool isRunning = true;
             while(isRunning)
             {
                 Console.WriteLine("=========================");
-                Console.WriteLine("[B]oka ett rum.");
-                Console.WriteLine("Checka [i]n på ett hotellrum.");
-                Console.WriteLine("Checka [u]t från a hotellrum.");
-                Console.WriteLine("[A]vboka en bokning.");
-                Console.WriteLine("A[v]sluta.");
-                Console.WriteLine("Val: ");
+                Console.WriteLine("[1] Visa tillgängliga rum.");
+                Console.WriteLine("[2] Boka ett rum.");
+                Console.WriteLine("[3] Avboka en bokning.");
+                Console.WriteLine("[4] Avsluta.");
+                Console.WriteLine("Ange ditt val: ");
 
                 string choice = Console.ReadLine();
 
-                switch (choice.ToLower())
+                switch (choice)
                 {
-                    case "b":
-                    BookRoom bookRoom = new BookRoom();
-                    bookRoom.MakeBooking();
-                    break;
-
-                    case "i":
-                    //SystemCUI.CheckIn();
-                    break;
-
-                    case"u":
-                    //SystemCUI.CheckOut();
-                    break;
-
-                    case"a":
-                    ManageBooking managebooking = new ManageBooking();
-                    managebooking.CancelBooking();
-                    break;
-
-                    case"v":
-                    Console.WriteLine("Avsluta...");
-                    isRunning = false;
-                    break;
-
+                    case "1":
+                        ShowAvailableRooms();
+                        break;
+                    case "2":
+                        BookRoom bookRoom = new BookRoom();
+                        bookRoom.MakeBooking();
+                        break;
+                    case "3":
+                        ManageBooking managebooking = new ManageBooking();
+                        managebooking.CancelBooking();
+                        break;
+                    case "4":
+                        Console.WriteLine("Avslutar programmet...");
+                        isRunning = false;
+                        break;
                     default:
-                    Console.WriteLine("Jag förstår inte...");
-                    break;
-                
+                        Console.WriteLine("Ogiltigt val, försök igen.");
+                        break;
                 }
             }
         }
+
+        private void ShowAvailableRooms()
+        {
+            Console.WriteLine("Tillgängliga rum:");
+            roomList.ListAvailableRooms();
+            Console.WriteLine("Tryck på valfri tangent för att återgå till menyn...");
+            Console.ReadKey();
+        }
     }
-}       
+}
