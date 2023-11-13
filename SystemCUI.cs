@@ -21,7 +21,8 @@ namespace hotelcsharp
                 switch (choice.ToLower())
                 {
                     case "b":
-                    //SystemCUI.Book();
+                    BookRoom bookRoom = new BookRoom();
+                    bookRoom.MakeBooking();
                     break;
 
                     case "i":
@@ -33,7 +34,8 @@ namespace hotelcsharp
                     break;
 
                     case"a":
-                    //SystemCUI.CancelBooking();
+                    ManageBooking managebooking = new ManageBooking();
+                    managebooking.CancelBooking();
                     break;
 
                     case"v":
