@@ -20,6 +20,7 @@ namespace hotelcsharp
             {
                 userRole = "Anställd";
                 ManageEmployee();
+                ShowEmployeeMenu();
             }
             else
             {
@@ -58,8 +59,15 @@ namespace hotelcsharp
                 }
             }
   
-                
         }
+
+        private void ShowEmployeeMenu()
+        {
+            MenuEmployee employeeMenu = new MenuEmployee();
+            employeeMenu.ShowEmployeeMenu();
+            
+        }
+
 
         private void ManageEmployee()
         {
