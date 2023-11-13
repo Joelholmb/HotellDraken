@@ -1,47 +1,52 @@
-
 namespace hotelcsharp
 {
-   public class BookRoom
-   {
+    public class BookRoom
+    {
+        RoomList roomList = RoomList.GetInstance();
+
 
         public void MakeBooking()
         {
-                
-            RoomList roomList = new RoomList();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("Tillgängliga rum:");
+            Console.ResetColor();
 
-            while(true)
+            roomList.ListAvailableRooms();
+
+            while (true)
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Ange numret på det rum du vill boka [1-3]\n");
-                Console.ResetColor();
-
-                roomList.ListAvailableRooms();
-                string userinput = Console.ReadLine();
-                    
-                bool Available = int.TryParse(userinput, out int roomIndex);
-
-                if (Available && roomIndex > 0 && roomIndex <= roomList.room.Count)
+                Console.WriteLine("\nAnge numret på det rum du vill boka [1-3] eller 0 för att avbryta:");
+                string userInput = Console.ReadLine();
+                
+                if (int.TryParse(userInput, out int roomIndex))
                 {
-                    roomList.ShowInfoRoom(roomIndex);
-                    Console.Write("\nVill du boka detta rum? (ja/nej): ");
-                    string userInput = Console.ReadLine();
-                        
-                    if (userInput == "ja")
+                    if (roomIndex == 0)
                     {
-                        roomList.BookRoom(roomIndex);
                         break;
                     }
-                }
-                else if (Available && roomIndex == 0)
-                {
-                    break; 
+
+                    if (roomIndex > 0 && roomIndex <= roomList.rooms.Count)
+                    {
+                        roomList.ShowInfoRoom(roomIndex);
+                        Console.Write("\nVill du boka detta rum? (ja/nej): ");
+                        userInput = Console.ReadLine();
+                        
+                        if (userInput.Equals("ja", StringComparison.OrdinalIgnoreCase))
+                        {
+                            roomList.BookRoom(roomIndex);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ogiltigt val. Försök igen.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Ogiltigt val. Försök igen.");
-                    Console.ReadLine();
+                    Console.WriteLine("Felaktig inmatning. Ange ett tal mellan 1 och 3, eller 0 för att avbryta.");
                 }
-            }     
+            }
         }
     }
 }
