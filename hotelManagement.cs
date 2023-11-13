@@ -14,6 +14,7 @@ namespace hotelcsharp
             {
                 userRole = "Gäst";
                 ManageGuest();
+                ShowGuestMenu();
             }
             else if (input.Equals("A", StringComparison.OrdinalIgnoreCase))
             {
@@ -25,6 +26,12 @@ namespace hotelcsharp
                 Console.WriteLine("Felaktig inmatning. Välj antingen G eller A.");
                 ChooseRole();
             }
+        }
+        private void ShowGuestMenu()
+        {
+            Menu guestMenu = new Menu();
+            guestMenu.ShowGuestMenu();
+            
         }
 
         private void ManageGuest()
@@ -50,7 +57,7 @@ namespace hotelcsharp
                     ManageGuest();
                 }
             }
-           
+  
                 
         }
 
