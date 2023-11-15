@@ -2,14 +2,6 @@ namespace hotelcsharp
 {
     class MenuEmployee
     {
-        private RoomList roomList;
-
-        // Konstruktor som tar emot en RoomList-instans
-        public MenuEmployee(RoomList roomList)
-        {
-            this.roomList = roomList;
-        }
-
         public void ShowEmployeeMenu()
         {
             bool isRunning = true;
@@ -31,12 +23,14 @@ namespace hotelcsharp
                     ShowAvailableRooms(); 
                         break;
                     case "2":
+                    ShowBookedRooms();
                     CheckInGuest();
                         break;
                     case "3":
 
                         break;
                     case "4":
+                    ShowBookedRooms();
                     CheckOutGuest();
                         break;
                     case "5":
@@ -49,6 +43,17 @@ namespace hotelcsharp
                 }
             }
         }
+        public void ShowBookedRooms()
+        {
+            Console.WriteLine("Lista över bokade rum:");
+            foreach (var room in RoomList.rooms)
+            {
+                if (room.IsBooked)
+                {
+                    Console.WriteLine($"Bokningsnr: {room.BookingNumber}, Rum: {room.RoomName}");
+                }
+            }
+        }
 
         public void ShowAvailableRooms()
         {
@@ -56,7 +61,7 @@ namespace hotelcsharp
             bool availableRoomFound = false;
 
             // loopar genom rummen för att hitta lediga rum
-            foreach (var room in roomList.rooms)
+            foreach (var room in RoomList.rooms)
             {
                 if (room.IsBooked == false)
                 {
@@ -80,7 +85,7 @@ namespace hotelcsharp
             bool roomFound = false;
 
             // loopar genom rummen för att hitta och checka in gästen
-            foreach (var room in roomList.rooms)
+            foreach (var room in RoomList.rooms)
             {
                 if (room.BookingNumber == bookingNumber && room.IsBooked)
                 {
@@ -110,7 +115,7 @@ namespace hotelcsharp
             
             // Itererar genom rummen för att hitta och checka ut gästen
             bool roomFound = false;
-            foreach (var room in roomList.rooms)
+            foreach (var room in RoomList.rooms)
             {
                 if (room.BookingNumber == bookingNumber && room.IsBooked)
                 {
