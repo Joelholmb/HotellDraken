@@ -12,7 +12,7 @@ namespace hotelcsharp
                 Console.WriteLine("[2] Checka in gäst.");
                 Console.WriteLine("[3] Underhåll rum.");
                 Console.WriteLine("[4] Checka ut gäst");
-                Console.WriteLine("[5] Avsluta.");
+                Console.WriteLine("[5] Logga ut.");
                 Console.WriteLine("Ange ditt val: ");
 
                 string choice = Console.ReadLine();
@@ -34,7 +34,7 @@ namespace hotelcsharp
                     CheckOutGuest();
                         break;
                     case "5":
-                        Console.WriteLine("Avslutar programmet...");
+                        Console.WriteLine("Du är nu utloggad.");
                         isRunning = false;
                         break;
                     default:
