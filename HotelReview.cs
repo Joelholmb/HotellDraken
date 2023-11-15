@@ -1,6 +1,6 @@
 public class GuestReview
 {
-    static void Main()
+    Public void R1()
     {
         Console.WriteLine("1. Multiple choice");
         Console.WriteLine("2. Free text");
