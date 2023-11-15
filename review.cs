@@ -84,8 +84,6 @@ while (Running)
 
                 }
             }
-    }
-}
 
 }
 
