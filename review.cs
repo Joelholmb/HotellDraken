@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 class Program
 {
-    static void Main()
-    {
+   
         bool keepRunning = true;
 
         while (keepRunning)
