@@ -6,7 +6,7 @@ namespace hotelcsharp
 
         static RoomList() 
         {
-            // Fördefinerade rum som läggs till i listan
+            // Initialisera rummen med förinställda värden
             rooms = new List<Rooms>
             {
                 new Rooms("Lancelot", "Superior-rum", "2 enkelsängar", "26 kvadratmeter", "en betongvägg", "3700 kr"),
@@ -17,10 +17,11 @@ namespace hotelcsharp
 
         public static void ListAvailableRooms()
         {
+            // Visa tillgängliga rum
             int index = 1;
             foreach (var room in rooms)
             {
-                if (!room.IsBooked)
+                if (room.IsBooked == false)
                 {
                     Console.WriteLine($"{index}. {room.RoomName}, {room.RoomType}. Pris för en natt {room.RoomPrice}.");
                     index++;
@@ -30,10 +31,13 @@ namespace hotelcsharp
 
         public static void ShowInfoRoom(int roomIndex)
         {
+            // Visa information om ett specifikt rum baserat på index
             if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
                 var selectedRoom = rooms[roomIndex - 1];
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"\nInformation för rummet {selectedRoom.RoomName}:");
+                Console.ResetColor();
                 Console.WriteLine($"{selectedRoom.RoomType}");
                 Console.WriteLine($"{selectedRoom.RoomSize}");
                 Console.WriteLine($"{selectedRoom.TypeBed}");
@@ -48,32 +52,70 @@ namespace hotelcsharp
 
         public static bool BookRoom(int roomIndex, DateTime startDate, DateTime endDate)
         {
+            // Boka ett rum om det är tillgängligt under önskad period
+            bool bookingSuccess = false;
             if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
                 Rooms roomToBook = rooms[roomIndex - 1];
-                if (!roomToBook.BookedPeriods.Any(p => startDate < p.end && endDate > p.start))
+                bool isOverlap = false;
+
+                // Kontrollera om datumet krockar med befintliga bokningar
+                int i = 0;
+                while (i < roomToBook.BookedPeriods.Count && !isOverlap)
+                {
+                    var period = roomToBook.BookedPeriods[i];
+                    if (startDate < period.end && endDate > period.start)
+                    {
+                        isOverlap = true;
+                    }
+                    i++;
+                }
+
+                // Utför bokningen om det inte finns någon överlappning
+                if (isOverlap == false)
                 {
                     roomToBook.Book(startDate, endDate);
-                    return true; // Returnera sant för att indikera att bokningen lyckades
+                    bookingSuccess = true;
                 }
             }
-            return false; // Returnera falskt om bokningen inte går att genomföra
+            return bookingSuccess;
         }
 
         public static List<(DateTime start, DateTime end)> GetAvailableWeekIntervals(int roomIndex, int numberOfWeeks)
         {
+            // Hämta tillgängliga veckointervall för ett rum
             List<(DateTime start, DateTime end)> availableIntervals = new List<(DateTime start, DateTime end)>();
-            DateTime currentDate = DateTime.Today;
-            var room = rooms[roomIndex - 1];
-
-            for (int i = 0; i < numberOfWeeks; i++)
+            if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
-                var weekStart = currentDate.AddDays(i * 7);
-                var weekEnd = weekStart.AddDays(7);
+                var room = rooms[roomIndex - 1];
+                DateTime currentDate = DateTime.Today;
 
-                if (!room.BookedPeriods.Any(p => weekStart < p.end && weekEnd > p.start))
+                // Iterera över antal veckor för att hitta lediga intervall
+                int week = 0;
+                while (week < numberOfWeeks)
                 {
-                    availableIntervals.Add((weekStart, weekEnd));
+                    var weekStart = currentDate.AddDays(week * 7);
+                    var weekEnd = weekStart.AddDays(7);
+                    bool isOverlap = false;
+
+                    // Kontrollera varje bokad period för att se om det finns en överlappning
+                    int i = 0;
+                    while (i < room.BookedPeriods.Count && isOverlap == false)
+                    {
+                        var period = room.BookedPeriods[i];
+                        if (weekStart < period.end && weekEnd > period.start)
+                        {
+                            isOverlap = true;
+                        }
+                        i++;
+                    }
+
+                    // Lägg till intervallet i listan om det inte finns någon överlappning
+                    if (isOverlap == false)
+                    {
+                        availableIntervals.Add((weekStart, weekEnd));
+                    }
+                    week++;
                 }
             }
 
@@ -82,6 +124,7 @@ namespace hotelcsharp
 
         public static void ListBookedRooms()
         {
+            // Visa en lista över alla bokade rum
             Console.WriteLine("Bokade rum:");
             foreach (var currentRoom in rooms)
             {
@@ -94,6 +137,7 @@ namespace hotelcsharp
 
         public static bool CancelRoomBooking(int bookingNumber)
         {
+            // Avboka ett rum baserat på bokningsnummer
             foreach (var room in rooms)
             {
                 if (room.BookingNumber == bookingNumber && room.IsBooked)
