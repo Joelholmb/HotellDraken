@@ -18,16 +18,8 @@ namespace hotelcsharp
             // Loopar igenom varje gäst i listan och skriver ut deras information
             foreach (Guest guest in guests)
             {
-                
                 Console.WriteLine($" Namn: {guest.Name}. Adress: {guest.Adress}. Mobilnr: {guest.PhoneNumber}. Epostadress: {guest.Email}.");
-                
             }
-            
         }
-      
-        
-
     }
-
-
 }

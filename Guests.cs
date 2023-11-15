@@ -16,15 +16,6 @@ namespace hotelcsharp
             Adress = address;
             PhoneNumber = phoneNumber;
             Email = email;
-            
         }
-        // Överskriver metoden ToString för att returnera gästens namn när Guest-instansen anropas från ManageGuest som ligger under HotelManagement.cs.
-        public override string ToString()
-        {
-            return Name;
-        }
-
-
-
     }
 }    
