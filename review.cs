@@ -33,58 +33,13 @@ class Review
         Review.Add(a);
     }
 }
-static void Review() {
-        RandomReviews.AddRange(Questions1);
-        RandomReviews.AddRange(Questions2);
-
-
-        bool Running = true;
-
-        while (Running)
-        {
-        Console.Clear();
-        MenuUI();
-
-        string input = Console.ReadLine();
-
-        switch (input)
-        {
-        case "1":
-            foreach (Reviews A in Reviews)
-            {
-                A.ReviewsUI();
-            }
-            break;
-        case "2":
-            Console.Clear();
-            AddReviewUI();
-            int choice = int.Parse(Console.ReadLine());
-            if (choice == 1)
-            {
-
-                MultiChoice newReview = new MultiChoice("", , "", "", "", "", ); newReview.AddReview(Reviews);
-            }
-
-            else if (choice == 3)
-            {
-
-                FreeText newReview = new FreeText("", , "", ""); newReview.AddReview(Review);
-            }
-            break;
-
-            
-        }
-    }
-
-}
-
 
 class MultiChoice : Review
 {
 
     public MultiChoice(string question, int 1, int 2, int 3, int 4, int 5, int Answer) : base(question)
     {
-            1 = 1
+        1 = 1
             2 = 2
             3 = 3
             4 = 4
@@ -112,27 +67,7 @@ class MultiChoice : Review
             Answer = Answer;
         }
 
-        public state1 void ReviewUI()
-        {
-            base.ReviewUI();
-        }
-        public state void AddReview(List<Review> Reviews)
-        {
-            base.AddReview(Reviews);
-            Console.Write(":");
-            Console.Write("Text you wrote!");
-            string Answer = Console.ReadLine();
-            string FreeText = Answer;
-
-            if (Answer == FreeText)
-            {
-                Review.Add(new FreeText(Question, FreeText, Answer));
-                Console.WriteLine("Succesfully!");
-            }
-            else
-                Console.WriteLine("Wrong try again!");
-
-        }
+    
 
     }
 
