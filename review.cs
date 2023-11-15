@@ -33,15 +33,15 @@ class Review
         a = new FreeText("How is your stay?", "");
         Review.Add(a);
     }
-}
 
-public class Review
- bool keepRunning = true;
 
-while (keepRunning)
-{
+
+
+    bool keepRunning = true;
+
+    while (keepRunning)
+    {
     Console.Clear();
-    MenuUI();
 
     string input = Console.ReadLine();
 
@@ -52,57 +52,45 @@ while (keepRunning)
             {
                 A.ReviewUI();
             }
-            break;
+    break;
         case "2":
-            Console.Clear();
-            AddReviewUI();
-            int choice = int.Parse(Console.ReadLine());
-            if (choice == 1)
-            {
+        int choice = int.Parse(Console.ReadLine());
+        if (choice = 1)
+        {
 
-                MultiChoice newReview = new MultiChoice("", 0, "", "", "", "", 0); newReview.AddReview(Reviews);
-            }
-            else if (choice == 2)
-            {
+        MultiChoice newReview = new MultiChoice("", 0, "", "", "", "", 0); newReview.AddReview(Reviews);
+        }
+    else if (choice = 2)
+        {
 
-                FreeText newReview = new FreeText("", 0, "", ""); newReview.AddReview(Reviews);
-            }
-            else
-            {
-                System.Console.WriteLine("Wrong input!");
-
-            }
-            break;
+        FreeText newReview = new FreeText("", 0, "", ""); newReview.AddReview(Reviews);
+        }
+    else
+    {
+        System.Console.WriteLine("Wrong input!");
 
     }
-}
-class MultiChoice : Review2
-{
+    break;
+
+    }
 
     public MultiChoice(string question, int 1, int 2, int 3, int 4, int 5, int Answer) : base(question)
     {
-        1 = 1
+        {
+            1 = 1
             2 = 2
             3 = 3
             4 = 4
             5 = 5
             Answer = Answer;
+        }
     }
 
-    class FreeText : Review
+    public FreeText(string question, string Answer) : base(question)
     {
-        public string Answer { get; set; }
 
-        public FreeText(string question, string Answer) : base(question)
-        {
-
-            Answer = Answer;
-        }
-
-        public state1 void ReviewUI()
-        {
-            base.ReviewUI();
-        }
+    Answer = Answer;
+    }
 
     }
 
