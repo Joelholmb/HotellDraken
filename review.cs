@@ -52,19 +52,19 @@ class Review
             {
                 A.ReviewUI();
             }
-    break;
+break;
         case "2":
-        int choice = int.Parse(Console.ReadLine());
-        if (choice = 1)
-        {
+    int choice = int.Parse(Console.ReadLine());
+    if (choice = 1)
+    {
 
         MultiChoice newReview = new MultiChoice("", 0, "", "", "", "", 0); newReview.AddReview(Reviews);
-        }
+    }
     else if (choice = 2)
-        {
+    {
 
         FreeText newReview = new FreeText("", 0, "", ""); newReview.AddReview(Reviews);
-        }
+    }
     else
     {
         System.Console.WriteLine("Wrong input!");
@@ -72,25 +72,25 @@ class Review
     }
     break;
 
-    }
+}
 
-    public MultiChoice(string question, int 1, int 2, int 3, int 4, int 5, int Answer) : base(question)
+public MultiChoice(string question, int 1, int 2, int 3, int 4, int 5, int Answer) : base(question)
     {
-        {
-            1 = 1
-            2 = 2
-            3 = 3
-            4 = 4
-            5 = 5
-            Answer = Answer;
-        }
+    {
+        1 = 1
+        2 = 2
+        3 = 3
+        4 = 4
+        5 = 5
+        Answer = Answer;
     }
+}
 
-    public FreeText(string question, string Answer) : base(question)
+public FreeText(string question, string Answer) : base(question)
     {
 
     Answer = Answer;
-    }
+}
 
     }
 
