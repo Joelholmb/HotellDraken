@@ -2,13 +2,6 @@ namespace hotelcsharp
 {
     class Menu
     {
-        private RoomList roomList;
-
-        // Konstruktor som tar emot en RoomList-instans
-        public Menu(RoomList roomList)
-        {
-            this.roomList = roomList;
-        }
         public void ShowGuestMenu()
         {
             bool isRunning = true;
@@ -29,11 +22,11 @@ namespace hotelcsharp
                         ShowAvailableRooms();
                         break;
                     case "2":
-                        BookRoom bookRoom = new BookRoom(roomList);
+                        BookRoom bookRoom = new BookRoom();
                         bookRoom.MakeBooking();
                         break;
                     case "3":
-                        ManageBooking managebooking = new ManageBooking(roomList);
+                        ManageBooking managebooking = new ManageBooking();
                         managebooking.CancelBooking();
                         break;
                     case "4":
@@ -47,10 +40,10 @@ namespace hotelcsharp
             }
         }
 
-        private void ShowAvailableRooms()
+        public void ShowAvailableRooms()
         {
             Console.WriteLine("Tillgängliga rum:");
-            roomList.ListAvailableRooms();
+            RoomList.ListAvailableRooms();
             Console.WriteLine("Tryck på valfri tangent för att återgå till menyn...");
             Console.ReadKey();
         }
