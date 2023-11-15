@@ -35,42 +35,53 @@ class Review
     }
     class MultiChoice : Review
     {
-        public int 1 { get; set; }
-    public int 2 { get; set; }
-public int 3 { get; set; }
-public int 4 { get; set; }
-public int 5 { get; set; }
-public int Answer { get; set; }
+        public int Option1 { get; set; }
+        public int Option2 { get; set; }
+        public int Option3 { get; set; }
+        public int Option4 { get; set; }
+        public int Option5 { get; set; }
+        public int Answer { get; set; }
 
-public MultiChoice(string question, int 1, int 2, int 3, int 4, int 5, int answer) : base(question)
+        public MultiChoice(string question, int option1, int option2, int option3, int option4, int option5, int answer) : base(question)
         {
-    1 = 1
-            2 = 2
-            3 = 3
-            4 = 4
-            5 = 5
+            Option1 = option1;
+            Option2 = option2;
+            Option3 = option3;
+            Option4 = option4;
+            Option5 = option5;
+            Answer = answer;
+        }
+
+        public override void ReviewUI()
+        {
+            Console.WriteLine($"Question: {Question}");
+            Console.WriteLine($"Options: {Option1}, {Option2}, {Option3}, {Option4}, {Option5}");
+            Console.WriteLine($"Answer: {Answer}");
+            Console.WriteLine();
         }
     }
+
+
     public override void ReviewUI()
-{
+    {
     // Add logic to display MultiChoice review UI
     Console.WriteLine($"Question: {Question}");
     Console.WriteLine($"Options: {1}, {2}, {3}, {4}, {5}");
     Console.WriteLine($"Answer: {Answer}");
     Console.WriteLine();
-}
+    }
 
 
-bool keepRunning = true;
+    bool keepRunning = true;
 
-while (keepRunning)
-{
-    Console.Clear();
-
-    string input = Console.ReadLine();
-
-    switch (input)
+    while (keepRunning)
     {
+        Console.Clear();
+
+        string input = Console.ReadLine();
+
+        switch (input)
+        {
         case "1":
             foreach (Review a in Reviews)
             {
@@ -95,8 +106,8 @@ while (keepRunning)
 
             }
             break;
+        }
     }
-}
 }
 
 
