@@ -34,6 +34,8 @@ class Review
     }
 }
 
+
+
 class MultiChoice : Review
 {
 
@@ -67,7 +69,27 @@ class MultiChoice : Review
             Answer = Answer;
         }
 
-    
+        public state1 void ReviewUI()
+        {
+            base.ReviewUI();
+        }
+        public state void AddReview(List<Review> Reviews)
+        {
+            base.AddReview(Reviews);
+            Console.Write(":");
+            Console.Write("Text you wrote!");
+            string Answer = Console.ReadLine();
+            string FreeText = Answer;
+
+            if (Answer == FreeText)
+            {
+                Review.Add(new FreeText(Question, FreeText, Answer));
+                Console.WriteLine("Succesfully!");
+            }
+            else
+                Console.WriteLine("Wrong try again!");
+
+        }
 
     }
 
