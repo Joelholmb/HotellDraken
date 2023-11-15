@@ -2,14 +2,17 @@ namespace hotelcsharp
 {
     public class BookRoom
     {
+        // Huvudmetod för att hantera rum-bokningsprocessen
         public void MakeBooking()
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Tillgängliga rum:");
             Console.ResetColor();
 
+            // Visar en lista över tillgängliga rum
             RoomList.ListAvailableRooms();
 
+            // Få användarens val av rum
             int roomIndex = GetRoomChoice();
             if (roomIndex == 0) 
             {
@@ -17,13 +20,18 @@ namespace hotelcsharp
                 return;
             }
 
+            // Visar information om det valda rummet
             RoomList.ShowInfoRoom(roomIndex);
+
+            // Begär bekräftelse från användaren innan bokningen fortsätter
             if (GetUserConfirmation())
             {
+                // Hanterar bokningsprocessen baserat på användarens val
                 ProcessBooking(roomIndex);
             }
         }
 
+        // Metod för att få användarens rumval
         private int GetRoomChoice()
         {
             while (true)
@@ -38,14 +46,17 @@ namespace hotelcsharp
             }
         }
 
+        // Metod för att bekräfta användarens val
         private bool GetUserConfirmation()
         {
             Console.Write("\nVill du boka detta rum? (ja/nej): ");
             return Console.ReadLine().Equals("ja", StringComparison.OrdinalIgnoreCase);
         }
 
+        // Metod för att hantera bokningen av ett rum
         private void ProcessBooking(int roomIndex)
         {
+            // Hämta tillgängliga bokningsintervall för rummet
             var availableIntervals = RoomList.GetAvailableWeekIntervals(roomIndex, 4);
             Console.WriteLine("\nVälj ett bokningsintervall från följande tillgängliga tider:");
             for (int i = 0; i < availableIntervals.Count; i++)
@@ -53,13 +64,14 @@ namespace hotelcsharp
                 Console.WriteLine($"{i + 1}. {availableIntervals[i].Item1.ToShortDateString()} till {availableIntervals[i].Item2.ToShortDateString()}");
             }
 
+            // Få användarens val av bokningsintervall
             int intervalChoice = GetIntervalChoice(availableIntervals.Count);
             var chosenInterval = availableIntervals[intervalChoice - 1];
 
+            // Försök att boka rummet och meddela användaren om utfallet
             if (RoomList.BookRoom(roomIndex, chosenInterval.Item1, chosenInterval.Item2))
             {
                 Console.WriteLine($"Rum {RoomList.rooms[roomIndex - 1].RoomName} bokat från {chosenInterval.Item1.ToShortDateString()} till {chosenInterval.Item2.ToShortDateString()}.");
-                
             }
             else
             {
@@ -67,6 +79,7 @@ namespace hotelcsharp
             }
         }
 
+        // Metod för att få användarens val av bokningsintervall
         private int GetIntervalChoice(int count)
         {
             int intervalChoice;
