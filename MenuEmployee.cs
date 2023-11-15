@@ -121,8 +121,9 @@ namespace hotelcsharp
                 {
                     roomFound = true;
                     room.IsBooked = false;
-                    
                     Console.WriteLine($"Gäst har checkats ut från rum {room.RoomName} med bokningsnummer {bookingNumber}.");
+                    
+                    PromptGuestForReview();
                     break;
                 }
             }
@@ -131,6 +132,12 @@ namespace hotelcsharp
             {
                 Console.WriteLine("Ingen giltig bokning hittades för detta bokningsnummer.");
             }
+            
+        }
+        private void PromptGuestForReview()
+        {
+            Review1 makereview = new Review1();
+            makereview.R1();
         }
     }
 }
