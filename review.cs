@@ -1,6 +1,6 @@
 
 
-class Review1
+class Review
 {
 
 
@@ -35,7 +35,7 @@ class Review1
     }
 }
 
-public class Review1
+public class Review
  bool keepRunning = true;
 
 while (keepRunning)
