@@ -39,21 +39,21 @@ class Review
 
     bool keepRunning = true;
 
-    while (keepRunning)
+        while (keepRunning)
     {
-    Console.Clear();
+        Console.Clear();
 
-    string input = Console.ReadLine();
+        string input = Console.ReadLine();
 
-    switch (input)
-    {
-        case "1":
-            foreach (Review a in Reviews)
-            {
-                A.ReviewUI();
-            }
+        switch (input)
+        {
+                case "1":
+                    foreach (Review a in Reviews)
+                    {
+                        A.ReviewUI();
+                    }
 break;
-        case "2":
+                case "2":
     int choice = int.Parse(Console.ReadLine());
     if (choice = 1)
     {
@@ -75,25 +75,25 @@ break;
 }
 
 public MultiChoice(string question, int 1, int 2, int 3, int 4, int 5, int Answer) : base(question)
+        {
     {
-    {
-        1 = 1
-        2 = 2
-        3 = 3
-        4 = 4
-        5 = 5
-        Answer = Answer;
+                1 = 1
+                2 = 2
+                3 = 3
+                4 = 4
+                5 = 5
+                Answer = Answer;
     }
 }
 
 public FreeText(string question, string Answer) : base(question)
-    {
+        {
 
     Answer = Answer;
 }
 
+        
     }
-
 }
 
 
