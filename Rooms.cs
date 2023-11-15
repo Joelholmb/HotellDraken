@@ -47,14 +47,16 @@ namespace hotelcsharp
             IsBooked = true;
             BookingNumber = nextBookingNumber++;
             Console.WriteLine($"Rum {RoomName} bokat från {startDate.ToShortDateString()} till {endDate.ToShortDateString()}.");
+            Console.WriteLine($"Ditt bokningsnummer är: {BookingNumber}.");
         }
         // Metod för att avboka rummet. Återställer IsBooked till false
         public void CancelBooking()
         {
-            if (IsBooked)
+            // Kontrollera om det finns bokade intervaller
+            if (IsBooked && BookedPeriods.Count > 0)
             {
-                IsBooked = false;
-                
+                BookedPeriods.Clear(); // Rensa listan över bokade intervaller
+                IsBooked = false; // Markera rummet som ej bokat
             }
         }
         //Metod för att kolla nör rum är lediga
