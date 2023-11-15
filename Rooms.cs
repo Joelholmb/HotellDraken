@@ -5,6 +5,8 @@ namespace hotelcsharp
     public class Rooms
     {
         private static int nextBookingNumber = 1;
+        // En statisk variabel som håller koll på nästa tillgängliga bokningsnummer
+
         public string RoomName { get; set; }
         public string RoomType { get; set; }
         public int BookingNumber { get; set; }
@@ -26,12 +28,13 @@ namespace hotelcsharp
             IsBooked = false;
             
         }
+        // Metod för att boka rummet. Sätter IsBooked till true och tilldelar ett bokningsnummer
             public void Book()
         {
-            if (!IsBooked)
+            if (IsBooked == false)
             {
                 IsBooked = true;
-                BookingNumber = nextBookingNumber++;
+                BookingNumber = nextBookingNumber++; // Ökar nästa bokningsnummer
                 Console.WriteLine($"Rum {RoomName} bokat med bokningsnummer {BookingNumber}.");
             }
             else
@@ -39,6 +42,7 @@ namespace hotelcsharp
                 Console.WriteLine("Rummet är redan bokat.");
             }
         }
+        // Metod för att avboka rummet. Återställer IsBooked till false
         public void CancelBooking()
         {
             if (IsBooked)

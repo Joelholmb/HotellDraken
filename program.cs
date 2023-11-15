@@ -7,7 +7,12 @@ namespace hotelcsharp
         
         static void Main(string[] args)
         {
-            HotelManagement hotelManagement = new HotelManagement();
+            RoomList roomList = new RoomList();
+            
+            BookRoom bookRoom = new BookRoom(roomList);
+            MenuEmployee menuEmployee = new MenuEmployee(roomList);
+
+            HotelManagement hotelManagement = new HotelManagement(roomList);
             hotelManagement.ChooseRole();
 
         }

@@ -2,7 +2,13 @@ namespace hotelcsharp
 {
     class MenuEmployee
     {
-        private RoomList roomList = RoomList.GetInstance();
+        private RoomList roomList;
+
+        // Konstruktor som tar emot en RoomList-instans
+        public MenuEmployee(RoomList roomList)
+        {
+            this.roomList = roomList;
+        }
 
         public void ShowEmployeeMenu()
         {
@@ -49,6 +55,7 @@ namespace hotelcsharp
             Console.WriteLine("Tillgängliga rum:");
             bool availableRoomFound = false;
 
+            // loopar genom rummen för att hitta lediga rum
             foreach (var room in roomList.rooms)
             {
                 if (room.IsBooked == false)
@@ -64,15 +71,15 @@ namespace hotelcsharp
             }
 
         }
+        // Metod för att checka in en gäst
         public void CheckInGuest()
         {
             Console.Write("Ange bokningsnummer för incheckning: ");
             int bookingNumber = int.Parse(Console.ReadLine());
 
-            var roomList = RoomList.GetInstance();
             bool roomFound = false;
 
-            
+            // loopar genom rummen för att hitta och checka in gästen
             foreach (var room in roomList.rooms)
             {
                 if (room.BookingNumber == bookingNumber && room.IsBooked)
@@ -83,25 +90,26 @@ namespace hotelcsharp
                     break;
                 }
             }
-
+            // Meddelar om ingen giltig bokning hittades
             if (roomFound == false)
             {
                 Console.WriteLine("Ingen giltig bokning hittades för detta bokningsnummer.");
             }
         }
-
+        // Metod för att checka ut en gäst
         public void CheckOutGuest()
         {
             Console.Write("Ange bokningsnummer för utcheckning: ");
             int bookingNumber;
+            // Kontrollerar att inmatningen är en giltig int
             while (!int.TryParse(Console.ReadLine(), out bookingNumber))
             {
                 Console.Write("Felaktigt format, ange bokningsnummer igen: ");
             }
 
-            var roomList = RoomList.GetInstance();
+            
+            // Itererar genom rummen för att hitta och checka ut gästen
             bool roomFound = false;
-
             foreach (var room in roomList.rooms)
             {
                 if (room.BookingNumber == bookingNumber && room.IsBooked)
@@ -113,7 +121,7 @@ namespace hotelcsharp
                     break;
                 }
             }
-
+            // Meddelar om ingen giltig bokning hittades
             if (roomFound == false)
             {
                 Console.WriteLine("Ingen giltig bokning hittades för detta bokningsnummer.");

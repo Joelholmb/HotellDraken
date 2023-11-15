@@ -15,7 +15,7 @@ namespace hotelcsharp
             Console.WriteLine(" Här är Gästlistan för hotell Draken.\n");
             Console.ResetColor();
             
-            
+            // Loopar igenom varje gäst i listan och skriver ut deras information
             foreach (Guest guest in guests)
             {
                 

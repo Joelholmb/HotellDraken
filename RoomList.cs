@@ -2,32 +2,25 @@ namespace hotelcsharp
 {
     public class RoomList
     {
-        private static RoomList instance;
         public List<Rooms> rooms { get; private set; }
-        private RoomList() 
+        //Denna konstruktion används för att skydda data. Även om andra delar av programmet kan se vilka rum som finns, kan de inte ändra listan av rum direkt. 
+        public RoomList() 
         {
             rooms = new List<Rooms>
             {
+                //Fördefinerade rum som läggs till i listan.
                 new Rooms("Lancelot", "Superior-rum", "2 enkelsängar", "26 kvadratmeter", "en betongvägg", "3700 kr"),
                 new Rooms("Merlin", "Premium-rum", "1 queen-size säng", "36 kvadratmeter", "staden", "5000 kr"),
                 new Rooms("Arthur", "Svit", "1 kingsize-säng", "49 kvadratmeter", "havet", "12000 kr"),
             };
         }
-
-        public static RoomList GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new RoomList();
-            }
-            return instance;
-        }
-        
+        // Listar alla tillgängliga rum som inte är bokade
         public void ListAvailableRooms()
         {
             int index = 1;
             foreach (var currentRoom in rooms)
             {
+                // Kontrollerar om rummet inte är bokat och skriver ut information
                 if (currentRoom.IsBooked == false)
                 {
                     Console.WriteLine($"{index}. {currentRoom.RoomName}, {currentRoom.RoomType}. Pris för en natt {currentRoom.RoomPrice}.");
@@ -35,13 +28,15 @@ namespace hotelcsharp
                 index++;
             }
         }
-
+        // Bokar ett specifikt rum baserat på indexet i listan
         public void BookRoom(int roomIndex)
         {
+            // Kontrollerar att rumindexet är inom giltiga gränser
             if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
                 Rooms roomToBook = rooms[roomIndex - 1];
-                if (!roomToBook.IsBooked)
+                 // Kontrollerar om rummet inte redan är bokat
+                if (roomToBook.IsBooked == false)
                 {
                     roomToBook.Book();
                 }
@@ -55,12 +50,13 @@ namespace hotelcsharp
                 Console.WriteLine("Ogiltigt val eller rummet är inte tillgängligt för bokning.");
             }
         }
-
+        // Visar information om ett specifikt rum baserat på index
         public void ShowInfoRoom(int roomIndex)
         {
             if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
                 var selectedRoom = rooms[roomIndex - 1];
+                 // Skriver ut detaljer om rummet
                 Console.WriteLine($"\nInformation för rummet {selectedRoom.RoomName}:");
                 Console.WriteLine($"{selectedRoom.RoomType}");
                 Console.WriteLine($"{selectedRoom.RoomSize}");
@@ -79,6 +75,7 @@ namespace hotelcsharp
             Console.WriteLine("Bokade rum:");
             foreach (var currentRoom in rooms)
             {
+                // Kontrollerar om rummet är bokat och visar bokningsinformation
                 if (currentRoom.IsBooked)
                 {
                     Console.WriteLine($"Bokningsnr: {currentRoom.BookingNumber} - {currentRoom.RoomName}");
