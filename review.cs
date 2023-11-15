@@ -33,21 +33,22 @@ class Review
         Review.Add(a);
     }
 }
-RandomReviews.AddRange(Questions1);
-RandomReviews.AddRange(Questions2);
+static void Review() {
+        RandomReviews.AddRange(Questions1);
+        RandomReviews.AddRange(Questions2);
 
 
-bool Running = true;
+        bool Running = true;
 
-while (Running)
-{
-    Console.Clear();
-    MenuUI();
+        while (Running)
+        {
+        Console.Clear();
+        MenuUI();
 
-    string input = Console.ReadLine();
+        string input = Console.ReadLine();
 
-    switch (input)
-    {
+        switch (input)
+        {
         case "1":
             foreach (Reviews A in Reviews)
             {
@@ -71,19 +72,9 @@ while (Running)
             }
             break;
 
-            foreach (Review A in RandomReviews)
-            {
-
-                Console.WriteLine($"Name: {name}");
-                A.ReviewsUI();
-
-                if (A is FreeText)
-                {
-
-                    string stringanswer = Console.ReadLine();
-
-                }
-            }
+            
+        }
+    }
 
 }
 
@@ -91,55 +82,57 @@ while (Running)
 class MultiChoice : Review
 {
 
-public MultiChoice(string question, int 1, int 2, int 3, int 4, int 5, int Answer) : base(question)
+    public MultiChoice(string question, int 1, int 2, int 3, int 4, int 5, int Answer) : base(question)
     {
-    1 = 1
-        2 = 2
-        3 = 3
-        4 = 4
-        5 = 5
-        Answer = Answer;
-}
-
-public state void ReviewsUI()
-{
-    base.ReviewUI();
-
-    System.Console.WriteLine($"1. {1}".PadRight(30) + $"2. {2}");
-    System.Console.WriteLine($"3. {3}".PadRight(30) + $"4. {4} + 5. {5}");
-}
-
-
-
-class FreeText : Review
-{
-    public string Answer { get; set; }
-
-    public FreeText(string question, string Answer) : base(question)
-    {
-
-        Answer = Answer;
+            1 = 1
+            2 = 2
+            3 = 3
+            4 = 4
+            5 = 5
+            Answer = Answer;
     }
 
-    public state1 void ReviewUI()
+    public state void ReviewsUI()
     {
         base.ReviewUI();
-    }
-    public state void AddReview(List<Review> Reviews)
-    {
-        base.AddReview(Reviews);
-        Console.Write(":");
-        Console.Write("Text you wrote!");
-        string Answer = Console.ReadLine();
-        string FreeText = Answer;
 
-        if (Answer == FreeText)
+        System.Console.WriteLine($"1. {1}".PadRight(30) + $"2. {2}");
+        System.Console.WriteLine($"3. {3}".PadRight(30) + $"4. {4} + 5. {5}");
+    }
+
+
+
+    class FreeText : Review
+    {
+        public string Answer { get; set; }
+
+        public FreeText(string question, string Answer) : base(question)
         {
-            Review.Add(new FreeText(Question, FreeText, Answer));
-            Console.WriteLine("Succesfully!");
+
+            Answer = Answer;
         }
-        else
-            Console.WriteLine("Wrong try again!");
+
+        public state1 void ReviewUI()
+        {
+            base.ReviewUI();
+        }
+        public state void AddReview(List<Review> Reviews)
+        {
+            base.AddReview(Reviews);
+            Console.Write(":");
+            Console.Write("Text you wrote!");
+            string Answer = Console.ReadLine();
+            string FreeText = Answer;
+
+            if (Answer == FreeText)
+            {
+                Review.Add(new FreeText(Question, FreeText, Answer));
+                Console.WriteLine("Succesfully!");
+            }
+            else
+                Console.WriteLine("Wrong try again!");
+
+        }
 
     }
 
