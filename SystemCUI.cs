@@ -11,7 +11,7 @@ namespace hotelcsharp
                 Console.WriteLine("[1] Visa tillgängliga rum.");
                 Console.WriteLine("[2] Boka ett rum.");
                 Console.WriteLine("[3] Avboka en bokning.");
-                Console.WriteLine("[4] Avsluta.");
+                Console.WriteLine("[4] Klar med bokning.");
                 Console.WriteLine("Ange ditt val: ");
 
                 string choice = Console.ReadLine();
@@ -30,7 +30,7 @@ namespace hotelcsharp
                         managebooking.CancelBooking();
                         break;
                     case "4":
-                        Console.WriteLine("Avslutar programmet...");
+                        Console.WriteLine("\nHoppas vi syns snart!");
                         isRunning = false;
                         break;
                     default:
@@ -42,7 +42,10 @@ namespace hotelcsharp
 
         public void ShowAvailableRooms()
         {
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Tillgängliga rum:");
+            Console.ResetColor();
+            
             RoomList.ListAvailableRooms();
             Console.WriteLine("Tryck på valfri tangent för att återgå till menyn...");
             Console.ReadKey();

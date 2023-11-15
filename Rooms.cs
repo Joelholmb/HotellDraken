@@ -46,8 +46,12 @@ namespace hotelcsharp
             BookedPeriods.Add((startDate, endDate));
             IsBooked = true;
             BookingNumber = nextBookingNumber++;
-            Console.WriteLine($"Rum {RoomName} bokat från {startDate.ToShortDateString()} till {endDate.ToShortDateString()}.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n--------------------------");
             Console.WriteLine($"Ditt bokningsnummer är: {BookingNumber}.");
+            Console.WriteLine("--------------------------");
+            Console.ResetColor();
+            
         }
         // Metod för att avboka rummet. Återställer IsBooked till false
         public void CancelBooking()

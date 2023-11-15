@@ -26,7 +26,9 @@ namespace hotelcsharp
                     // Försöker avboka rummet och kontrollerar om det lyckades
                     if (RoomList.CancelRoomBooking(bookingNumber))
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine($"Bokning av rum {bookingNumber} har avbokats.");
+                        Console.ResetColor();
                         isCancelled = true;  // Uppdaterar den booleanska flaggan till true för att avsluta loopen
                     }
                     }
