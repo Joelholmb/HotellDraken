@@ -1,39 +1,38 @@
 namespace hotelcsharp
 {
-    public class RoomList
+    public static class RoomList
     {
-        public List<Rooms> rooms { get; private set; }
-        //Denna konstruktion används för att skydda data. Även om andra delar av programmet kan se vilka rum som finns, kan de inte ändra listan av rum direkt. 
-        public RoomList() 
+        public static List<Rooms> rooms = new List<Rooms>();
+
+        static RoomList() 
         {
+            // Fördefinerade rum som läggs till i listan
             rooms = new List<Rooms>
             {
-                //Fördefinerade rum som läggs till i listan.
                 new Rooms("Lancelot", "Superior-rum", "2 enkelsängar", "26 kvadratmeter", "en betongvägg", "3700 kr"),
                 new Rooms("Merlin", "Premium-rum", "1 queen-size säng", "36 kvadratmeter", "staden", "5000 kr"),
                 new Rooms("Arthur", "Svit", "1 kingsize-säng", "49 kvadratmeter", "havet", "12000 kr"),
             };
         }
-        // Listar alla tillgängliga rum som inte är bokade
-        public void ListAvailableRooms()
+
+        public static void ListAvailableRooms()
         {
             int index = 1;
-            foreach (var currentRoom in rooms)
+            foreach (var room in rooms)
             {
-                if (!currentRoom.IsBooked)
+                if (!room.IsBooked)
                 {
-                    Console.WriteLine($"{index}. {currentRoom.RoomName}, {currentRoom.RoomType}. Pris för en natt {currentRoom.RoomPrice}.");
+                    Console.WriteLine($"{index}. {room.RoomName}, {room.RoomType}. Pris för en natt {room.RoomPrice}.");
                     index++;
                 }
             }
         }
 
-        public void ShowInfoRoom(int roomIndex)
+        public static void ShowInfoRoom(int roomIndex)
         {
             if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
                 var selectedRoom = rooms[roomIndex - 1];
-                 // Skriver ut detaljer om rummet
                 Console.WriteLine($"\nInformation för rummet {selectedRoom.RoomName}:");
                 Console.WriteLine($"{selectedRoom.RoomType}");
                 Console.WriteLine($"{selectedRoom.RoomSize}");
@@ -47,39 +46,23 @@ namespace hotelcsharp
             }
         }
 
-        public void BookRoom(int roomIndex)
+        public static bool BookRoom(int roomIndex, DateTime startDate, DateTime endDate)
         {
             if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
                 Rooms roomToBook = rooms[roomIndex - 1];
-
-                var availableIntervals = GetAvailableWeekIntervals(roomIndex, 4); // Exempel: nästa 4 veckor
-
-                Console.WriteLine("Välj ett bokningsintervall från följande tillgängliga tider:");
-                for (int i = 0; i < availableIntervals.Count; i++)
+                if (!roomToBook.BookedPeriods.Any(p => startDate < p.end && endDate > p.start))
                 {
-                    Console.WriteLine($"{i + 1}. {availableIntervals[i].Item1.ToShortDateString()} till {availableIntervals[i].Item2.ToShortDateString()}");
+                    roomToBook.Book(startDate, endDate);
+                    return true; // Returnera sant för att indikera att bokningen lyckades
                 }
-
-                Console.WriteLine("Välj ett intervall genom att ange numret:");
-                int intervalChoice;
-                while (!int.TryParse(Console.ReadLine(), out intervalChoice) || intervalChoice < 1 || intervalChoice > availableIntervals.Count)
-                {
-                    Console.WriteLine("Ogiltigt val, försök igen:");
-                }
-
-                var chosenInterval = availableIntervals[intervalChoice - 1];
-                roomToBook.Book(chosenInterval.Item1, chosenInterval.Item2);
             }
-            else
-            {
-                Console.WriteLine("Ogiltigt val eller rummet är inte tillgängligt för bokning.");
-            }
+            return false; // Returnera falskt om bokningen inte går att genomföra
         }
 
-        private List<(DateTime, DateTime)> GetAvailableWeekIntervals(int roomIndex, int numberOfWeeks)
+        public static List<(DateTime start, DateTime end)> GetAvailableWeekIntervals(int roomIndex, int numberOfWeeks)
         {
-            List<(DateTime, DateTime)> availableIntervals = new List<(DateTime, DateTime)>();
+            List<(DateTime start, DateTime end)> availableIntervals = new List<(DateTime start, DateTime end)>();
             DateTime currentDate = DateTime.Today;
             var room = rooms[roomIndex - 1];
 
@@ -97,12 +80,11 @@ namespace hotelcsharp
             return availableIntervals;
         }
 
-        public void ListBookedRooms()
+        public static void ListBookedRooms()
         {
             Console.WriteLine("Bokade rum:");
             foreach (var currentRoom in rooms)
             {
-                // Kontrollerar om rummet är bokat och visar bokningsinformation
                 if (currentRoom.IsBooked)
                 {
                     Console.WriteLine($"Bokningsnr: {currentRoom.BookingNumber} - {currentRoom.RoomName}");
@@ -110,17 +92,17 @@ namespace hotelcsharp
             }
         }
 
-        public bool CancelRoomBooking(int bookingNumber)
+        public static bool CancelRoomBooking(int bookingNumber)
         {
-            foreach (var currentRoom in rooms)
+            foreach (var room in rooms)
             {
-                if (currentRoom.BookingNumber == bookingNumber && currentRoom.IsBooked)
+                if (room.BookingNumber == bookingNumber && room.IsBooked)
                 {
-                    currentRoom.CancelBooking();
-                    return true;
+                    room.CancelBooking();
+                    return true; // Bokningen har avbokats korrekt
                 }
             }
-            return false;
+            return false; // Ingen bokning hittades med detta bokningsnummer
         }
     }
 }
