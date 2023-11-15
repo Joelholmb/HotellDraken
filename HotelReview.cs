@@ -1,9 +1,10 @@
 public class GuestReview
 {
-    Public void HotelReview()
+    static void Main()
     {
         Console.WriteLine("1. Multiple choice");
         Console.WriteLine("2. Free text");
+        Console.WriteLine("3. Number choice 1-10");
     }
 
 
@@ -33,6 +34,17 @@ public class GuestReview
             Console.WriteLine($"Answer: {Answer}");
             Console.WriteLine();
         }
+    }
+
+    static void Review()
+    {
+        List<GuestReview> Reviews = new List<GuestReview>();
+
+        // Creating a new instance of MultiChoice
+        GuestReview a = new MultiChoice("MultiChoice Question", 1, 2, 3, 4, 5, 3);
+        Reviews.Add(a);
+
+
     }
 
 }
