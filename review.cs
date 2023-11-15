@@ -22,15 +22,15 @@ class Review1
         a = new MultiChoice("", 100, "1", "2", "3", "4", "5");
         Review.Add(a);
 
-        a = new FreeText("What can my company do to better serve your needs?", 200, "", "");
+        a = new FreeText("What can my company do to better serve your needs?", "");
         Review.Add(a);
-        a = new FreeText("How satisfied are you with our products/services?", 200, "", "");
+        a = new FreeText("How satisfied are you with our products/services?", "");
         Review.Add(a);
-        a = new FreeText("What value do we provide?", 200, "", "");
+        a = new FreeText("What value do we provide?", "");
         Review.Add(a);
-        a = new FreeText("What do you like our hotel?", 200, "", "");
+        a = new FreeText("What do you like our hotel?", "");
         Review.Add(a);
-        a = new FreeText("How is your stay?", 200, "", "");
+        a = new FreeText("How is your stay?", "");
         Review.Add(a);
     }
 }
