@@ -20,37 +20,14 @@ namespace hotelcsharp
             int index = 1;
             foreach (var currentRoom in rooms)
             {
-                // Kontrollerar om rummet inte är bokat och skriver ut information
-                if (currentRoom.IsBooked == false)
+                if (!currentRoom.IsBooked)
                 {
                     Console.WriteLine($"{index}. {currentRoom.RoomName}, {currentRoom.RoomType}. Pris för en natt {currentRoom.RoomPrice}.");
+                    index++;
                 }
-                index++;
             }
         }
-        // Bokar ett specifikt rum baserat på indexet i listan
-        public void BookRoom(int roomIndex)
-        {
-            // Kontrollerar att rumindexet är inom giltiga gränser
-            if (roomIndex > 0 && roomIndex <= rooms.Count)
-            {
-                Rooms roomToBook = rooms[roomIndex - 1];
-                 // Kontrollerar om rummet inte redan är bokat
-                if (roomToBook.IsBooked == false)
-                {
-                    roomToBook.Book();
-                }
-                else
-                {
-                    Console.WriteLine("Rummet är redan bokat.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Ogiltigt val eller rummet är inte tillgängligt för bokning.");
-            }
-        }
-        // Visar information om ett specifikt rum baserat på index
+
         public void ShowInfoRoom(int roomIndex)
         {
             if (roomIndex > 0 && roomIndex <= rooms.Count)
@@ -68,6 +45,56 @@ namespace hotelcsharp
             {
                 Console.WriteLine("Ogiltigt rumindex.");
             }
+        }
+
+        public void BookRoom(int roomIndex)
+        {
+            if (roomIndex > 0 && roomIndex <= rooms.Count)
+            {
+                Rooms roomToBook = rooms[roomIndex - 1];
+
+                var availableIntervals = GetAvailableWeekIntervals(roomIndex, 4); // Exempel: nästa 4 veckor
+
+                Console.WriteLine("Välj ett bokningsintervall från följande tillgängliga tider:");
+                for (int i = 0; i < availableIntervals.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {availableIntervals[i].Item1.ToShortDateString()} till {availableIntervals[i].Item2.ToShortDateString()}");
+                }
+
+                Console.WriteLine("Välj ett intervall genom att ange numret:");
+                int intervalChoice;
+                while (!int.TryParse(Console.ReadLine(), out intervalChoice) || intervalChoice < 1 || intervalChoice > availableIntervals.Count)
+                {
+                    Console.WriteLine("Ogiltigt val, försök igen:");
+                }
+
+                var chosenInterval = availableIntervals[intervalChoice - 1];
+                roomToBook.Book(chosenInterval.Item1, chosenInterval.Item2);
+            }
+            else
+            {
+                Console.WriteLine("Ogiltigt val eller rummet är inte tillgängligt för bokning.");
+            }
+        }
+
+        private List<(DateTime, DateTime)> GetAvailableWeekIntervals(int roomIndex, int numberOfWeeks)
+        {
+            List<(DateTime, DateTime)> availableIntervals = new List<(DateTime, DateTime)>();
+            DateTime currentDate = DateTime.Today;
+            var room = rooms[roomIndex - 1];
+
+            for (int i = 0; i < numberOfWeeks; i++)
+            {
+                var weekStart = currentDate.AddDays(i * 7);
+                var weekEnd = weekStart.AddDays(7);
+
+                if (!room.BookedPeriods.Any(p => weekStart < p.end && weekEnd > p.start))
+                {
+                    availableIntervals.Add((weekStart, weekEnd));
+                }
+            }
+
+            return availableIntervals;
         }
 
         public void ListBookedRooms()
