@@ -9,7 +9,7 @@ namespace hotelcsharp
             //Huvudmenyn som loopar tills man är nöjd med sin bokning som gäst eller hantering av bokning som anställd
             while (true)
             {
-                Console.WriteLine("\nÄr du en gäst eller en anställd? (G/A)\nTryck på 'Q' för att skriva Gäst review");
+                Console.WriteLine("\nÄr du en gäst eller en anställd? (G/A)\nTryck på 'Q' för att avsluta");
                 string input = Console.ReadLine()?.ToUpper() ?? "";
 
                 switch (input)
@@ -22,7 +22,7 @@ namespace hotelcsharp
                         MenuEmployee.ShowEmployeeMenu();
                         break;
                     case "Q":
-                        Menu.HotelReview();
+                        Console.WriteLine("Klicka valfri tangent för att avsluta");
                         return;
                     default:
                         Console.WriteLine("Felaktig inmatning. Välj antingen G, A eller Q.");
