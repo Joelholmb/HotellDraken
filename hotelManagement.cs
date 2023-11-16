@@ -28,7 +28,7 @@ namespace hotelcsharp
             }
         }
 
-        // Metod för att logga in anställda
+            // Metod för att logga in anställda och visa anställdas meny
         public static void LoginEmployee()
         {
             Console.WriteLine("Ange ditt användarnamn!");
@@ -40,8 +40,7 @@ namespace hotelcsharp
             if (EmployeeList.Authenticate(username, password))
             {
                 Console.WriteLine($"Inloggningen lyckades, välkommen tillbaka {username}");
-                // Efter en framgångsrik inloggning, visa anställdas meny
-                MenuEmployee.ShowEmployeeMenu();
+                MenuEmployee.ShowEmployeeMenu();  // Visa anställdas meny
             }
             else
             {
@@ -50,3 +49,4 @@ namespace hotelcsharp
         }
     }
 }
+

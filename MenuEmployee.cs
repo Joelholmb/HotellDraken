@@ -133,7 +133,7 @@ namespace hotelcsharp
         }
         public static void PromptGuestForReview()
         {
-            Console.WriteLine("Vill du lämna en recension? (ja/nej): ");
+            Console.WriteLine("Kära gäst! Vill du recensera din vistelse? (ja/nej): ");
             string response = Console.ReadLine();
 
             if (response.Equals("ja", StringComparison.OrdinalIgnoreCase))

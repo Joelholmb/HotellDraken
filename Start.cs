@@ -20,7 +20,6 @@ namespace hotelcsharp
                         break;
                     case "A":
                         HotelManagement.LoginEmployee();
-                        MenuEmployee.ShowEmployeeMenu();
                         break;
                     case "Q":
                         Console.WriteLine("Klicka valfri tangent för att avsluta");
