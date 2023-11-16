@@ -3,7 +3,15 @@ namespace hotelcsharp
 
     public class HotelManagement
     {
+
         public string userRole;
+
+        List<Employee> employees = new List<Employee>
+        {
+            new Employee("liam@myhotel.com", "admin123"),
+            new Employee("william@myhotel.com","admin000"),
+            new Employee("camilla@myhotel.com","admin999"),
+        };
 
         public void ChooseRole()
         {
@@ -19,7 +27,9 @@ namespace hotelcsharp
             else if (input.Equals("A", StringComparison.OrdinalIgnoreCase))
             {
                 userRole = "Anställd";
-                ManageEmployee();
+                ManageEmployee("liam@myhotel.com", "admin123");
+                ManageEmployee("william@myhotel.com","admin000");
+                ManageEmployee("camilla@myhotel.com","admin999");
                 ShowEmployeeMenu();
             }
             else
@@ -69,11 +79,18 @@ namespace hotelcsharp
         }
 
 
-        private void ManageEmployee()
+        private void ManageEmployee(string username, string password)
         {
-            
-            Console.WriteLine("Välkommen tillbaka, kollega!");
-            
+            Employee employee = employees.Find(emp => emp.Username == username && emp.Password == password);
+            if (employee != null)
+            {
+                Console.WriteLine("Välkommen tillbaka, kollega!");
+                ShowEmployeeMenu();
+            }
+            else
+            {
+                Console.WriteLine("Ogiltigt användarnamn eller lösenord!");
+            }
         }
     }
 }
