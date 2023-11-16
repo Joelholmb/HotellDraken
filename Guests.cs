@@ -16,14 +16,6 @@ namespace hotelcsharp
             Adress = address;
             PhoneNumber = phoneNumber;
             Email = email;
-            
         }
-        public override string ToString()
-        {
-            return Name;
-        }
-
-
-
     }
 }    

@@ -1,17 +1,8 @@
 namespace hotelcsharp
 {
-
     public class HotelManagement
     {
-
         public string userRole;
-
-        List<Employee> employees = new List<Employee>
-        {
-            new Employee("liam@myhotel.com", "admin123"),
-            new Employee("william@myhotel.com","admin000"),
-            new Employee("camilla@myhotel.com","admin999"),
-        };
 
         public void ChooseRole()
         {
@@ -27,9 +18,7 @@ namespace hotelcsharp
             else if (input.Equals("A", StringComparison.OrdinalIgnoreCase))
             {
                 userRole = "Anställd";
-                ManageEmployee("liam@myhotel.com", "admin123");
-                ManageEmployee("william@myhotel.com","admin000");
-                ManageEmployee("camilla@myhotel.com","admin999");
+                ManageEmployee();
                 ShowEmployeeMenu();
             }
             else
@@ -47,10 +36,11 @@ namespace hotelcsharp
 
         private void ManageGuest()
         {
-            Console.WriteLine("Välj vilken profil du vill logga in med:");
+            Console.WriteLine("Välj vilken gästprofil du vill logga in med:");
             for (int i = 0; i < GuestList.guests.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {GuestList.guests[i]}");
+                // Visar en lista över tillgängliga gästprofiler
+                Console.WriteLine($"{i + 1}. {GuestList.guests[i].Name}");
             }
 
             if (int.TryParse(Console.ReadLine(), out int selectedGuestIndex))
@@ -79,18 +69,11 @@ namespace hotelcsharp
         }
 
 
-        private void ManageEmployee(string username, string password)
+        private void ManageEmployee()
         {
-            Employee employee = employees.Find(emp => emp.Username == username && emp.Password == password);
-            if (employee != null)
-            {
-                Console.WriteLine("Välkommen tillbaka, kollega!");
-                ShowEmployeeMenu();
-            }
-            else
-            {
-                Console.WriteLine("Ogiltigt användarnamn eller lösenord!");
-            }
+            
+            Console.WriteLine("Välkommen tillbaka, kollega!");
+            
         }
     }
 }
