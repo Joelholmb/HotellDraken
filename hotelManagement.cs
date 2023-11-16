@@ -1,4 +1,3 @@
-
 namespace hotelcsharp
 {
     public static class HotelManagement
@@ -21,6 +20,7 @@ namespace hotelcsharp
             {
                 Guest chosenGuest = GuestList.guests[selectedGuestIndex - 1];
                 Console.WriteLine($"Välkommen {chosenGuest.Name}.");
+                
             }
             else
             {
@@ -28,45 +28,25 @@ namespace hotelcsharp
             }
         }
 
-        public static class EmployeeList
+        // Metod för att logga in anställda
+        public static void LoginEmployee()
         {
+            Console.WriteLine("Ange ditt användarnamn!");
+            string username = Console.ReadLine();
 
-            private static List<Employee> employees;
+            Console.WriteLine("Ange ditt lösenord!");
+            string password = Console.ReadLine();
 
-            static EmployeeList()
+            if (EmployeeList.Authenticate(username, password))
             {
-                employees = new List<Employee>
-                {
-                    new Employee("liam@myhotel.com", "admin123"),
-                    new Employee("william@myhotel.com","admin000"),
-                    new Employee("camilla@myhotel.com","admin999"),
-                };
+                Console.WriteLine($"Inloggningen lyckades, välkommen tillbaka {username}");
+                // Efter en framgångsrik inloggning, visa anställdas meny
+                MenuEmployee.ShowEmployeeMenu();
             }
-            public static bool Authenticate(string username, string password)
+            else
             {
-                Employee employee = employees.Find(emp => emp.Username == username && emp.Password == password);
-                return employee != null;
-            }
-            
-    
-            public static void Login()
-            {
-                Console.WriteLine("Ange ditt användarnamn!");
-                string username = Console.ReadLine();
-
-                Console.WriteLine("Ange ditt läsenord!");
-                string password = Console.ReadLine();
-
-                if (Authenticate(username, password))
-                {
-                    Console.WriteLine($"Inloggningen lyckades, välkommen tillbaka {username}");
-                } 
-                else
-                {
-                    Console.WriteLine("Inloggningen misslyckades, försök igen senare");
-                }
+                Console.WriteLine("Inloggningen misslyckades, försök igen.");
             }
         }
     }
 }
-

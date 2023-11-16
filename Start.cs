@@ -19,6 +19,7 @@ namespace hotelcsharp
                         Menu.ShowGuestMenu();
                         break;
                     case "A":
+                        HotelManagement.LoginEmployee();
                         MenuEmployee.ShowEmployeeMenu();
                         break;
                     case "Q":
