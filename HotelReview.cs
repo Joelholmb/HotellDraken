@@ -32,9 +32,9 @@ namespace hotelcsharp
              {
                  Console.Clear();
                  Console.WriteLine("Vad kul! Gör nu ditt val.");
-                 Console.WriteLine("1. Skriv en recension");
-                 Console.WriteLine("2. Kolla vad du lämnat för recension");
-                 Console.WriteLine("3. Avsluta");
+                 Console.WriteLine("1. Skriv en recension.");
+                 Console.WriteLine("2. Kolla vad du lämnat för recension tidigare.");
+                 Console.WriteLine("3. Avsluta.");
 
                  string choice = Console.ReadLine();
 
@@ -50,7 +50,7 @@ namespace hotelcsharp
                          keepRunning = false;
                          break;
                      default:
-                         Console.WriteLine("Invalid choice. Please try again.");
+                         Console.WriteLine("Fel val! Försök igen.");
                         break;
                  }
              }
@@ -59,38 +59,38 @@ namespace hotelcsharp
         static void LeaveReview(List<HotelReview> reviews)
         {
             Console.Clear();
-            Console.WriteLine("Write a Review");
+            Console.WriteLine("Skriv en recension");
 
-            Console.Write("Your Name: ");
+            Console.Write("Namn: ");
             string userName = Console.ReadLine();
 
             Console.Write("Rating (1-5): ");
             int rating;
             while (!int.TryParse(Console.ReadLine(), out rating) || rating < 1 || rating > 5)
             {
-                Console.WriteLine("Invalid input. Please enter a number between 1 and 5.");
+                Console.WriteLine("Fel inmatning! Skriv in en siffra mellan 1-5.");
                 Console.Write("Rating (1-5): ");
             }
 
-            Console.Write("Comment: ");
+            Console.Write("Kommentar: ");
             string comment = Console.ReadLine();
 
             HotelReview review = new HotelReview(userName, rating, comment);
             reviews.Add(review);
 
-            Console.WriteLine("Thank you for your review!");
-            Console.WriteLine("Press Enter to continue...");
+            Console.WriteLine("Tack för din recension, den betyder mycket för oss!");
+            Console.WriteLine("Valfri tangent för att fortsätta...");
             Console.ReadLine();
         }
 
         static void ViewReviews(List<HotelReview> reviews)
         {
             Console.Clear();
-            Console.WriteLine("Hotel Reviews");
+            Console.WriteLine("Hotellrecensioner");
 
             if (reviews.Count == 0)
             {
-                Console.WriteLine("No reviews available.");
+                Console.WriteLine("Inga recensioner tillgängliga.");
             }
             else
             {
@@ -100,7 +100,7 @@ namespace hotelcsharp
                 }
             }
 
-            Console.WriteLine("Press Enter to continue...");
+            Console.WriteLine("Valfri tangent för att fortsätta...");
             Console.ReadLine();
         }
     }
