@@ -124,16 +124,24 @@ namespace hotelcsharp
 
         public static void ListBookedRooms()
         {
-            // Visa en lista över alla bokade rum
             Console.WriteLine("Bokade rum:");
+            bool bookedRoomFound = false;
+
             foreach (var currentRoom in rooms)
             {
                 if (currentRoom.IsBooked)
                 {
                     Console.WriteLine($"Bokningsnr: {currentRoom.BookingNumber} - {currentRoom.RoomName}");
+                    bookedRoomFound = true;
                 }
             }
+
+            if (bookedRoomFound == false)
+            {
+                Console.WriteLine("Det finns inga aktiva bokningar för närvarande.");
+            }
         }
+
 
         public static bool CancelRoomBooking(int bookingNumber)
         {
