@@ -2,39 +2,46 @@ namespace hotelcsharp
 {
     public class HotelManagement
     {
-        public string userRole;
+        private MenuEmployee menuEmployee;
+        private Menu menuGuest;
 
-        public void ChooseRole()
+        // Konstruktor för att initiera menyer för anställda och gäster
+        public HotelManagement()
         {
-            Console.WriteLine("Är du en gäst eller en anställd? (G/A)");
-            string input = Console.ReadLine();
-
-            if (input.Equals("G", StringComparison.OrdinalIgnoreCase))
-            {
-                userRole = "Gäst";
-                ManageGuest();
-                ShowGuestMenu();
-            }
-            else if (input.Equals("A", StringComparison.OrdinalIgnoreCase))
-            {
-                userRole = "Anställd";
-                ManageEmployee();
-                ShowEmployeeMenu();
-            }
-            else
-            {
-                Console.WriteLine("Felaktig inmatning. Välj antingen G eller A.");
-                ChooseRole();
-            }
-        }
-        private void ShowGuestMenu()
-        {
-            Menu guestMenu = new Menu();
-            guestMenu.ShowGuestMenu();
-            
+            menuEmployee = new MenuEmployee();
+            menuGuest = new Menu();
         }
 
-        private void ManageGuest()
+        // Startmetoden som kör huvudmenyn för programmet
+        public void Start()
+        {
+            while (true)
+            {
+                Console.WriteLine("\nÄr du en gäst eller en anställd? (G/A)\nTryck på 'Q' för att avsluta.");
+                string input = Console.ReadLine()?.ToUpper() ?? "";
+
+                // Hanterar användarens val och navigerar till rätt meny
+                switch (input)
+                {
+                    case "G":
+                        ChooseGuestProfile();
+                        menuGuest.ShowGuestMenu();
+                        break;
+                    case "A":
+                        menuEmployee.ShowEmployeeMenu();
+                        break;
+                    case "Q":
+                        Console.WriteLine("Avslutar programmet...");
+                        return;
+                    default:
+                        Console.WriteLine("Felaktig inmatning. Välj antingen G, A eller Q.");
+                        break;
+                }
+            }
+        }
+
+        // Metod för att låta användaren välja en gästprofil
+        private void ChooseGuestProfile()
         {
             Console.WriteLine("Välj vilken gästprofil du vill logga in med:");
             for (int i = 0; i < GuestList.guests.Count; i++)
@@ -43,37 +50,19 @@ namespace hotelcsharp
                 Console.WriteLine($"{i + 1}. {GuestList.guests[i].Name}");
             }
 
-            if (int.TryParse(Console.ReadLine(), out int selectedGuestIndex))
+            // Låter användaren välja en profil baserat på listnumret
+            int selectedGuestIndex = Convert.ToInt32(Console.ReadLine());
+
+            // Validerar valet och hälsar den valda gästen
+            if (selectedGuestIndex > 0 && selectedGuestIndex <= GuestList.guests.Count)
             {
-                selectedGuestIndex -= 1;
-                if (selectedGuestIndex >= 0 && selectedGuestIndex < GuestList.guests.Count)
-                {
-                    Guest chosenGuest = GuestList.guests[selectedGuestIndex];
-                    Console.WriteLine($"Välkommen {chosenGuest.Name}. Vad vill du göra?");
-                    
-                }
-                else
-                {
-                    Console.WriteLine("Felaktig inmatning. Välj ett nummer från listan.");
-                    ManageGuest();
-                }
+                Guest chosenGuest = GuestList.guests[selectedGuestIndex - 1];
+                Console.WriteLine($"Välkommen {chosenGuest.Name}.");
             }
-  
-        }
-
-        private void ShowEmployeeMenu()
-        {
-            MenuEmployee employeeMenu = new MenuEmployee();
-            employeeMenu.ShowEmployeeMenu();
-            
-        }
-
-
-        private void ManageEmployee()
-        {
-            
-            Console.WriteLine("Välkommen tillbaka, kollega!");
-            
+            else
+            {
+                Console.WriteLine("Felaktig inmatning. Välj ett nummer från listan.");
+            }
         }
     }
 }
