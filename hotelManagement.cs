@@ -1,3 +1,4 @@
+
 namespace hotelcsharp
 {
     public static class HotelManagement
@@ -19,6 +20,7 @@ namespace hotelcsharp
                         Menu.ShowGuestMenu();
                         break;
                     case "A":
+                        EmployeeList.Login();
                         MenuEmployee.ShowEmployeeMenu();
                         break;
                     case "Q":
@@ -55,5 +57,46 @@ namespace hotelcsharp
                 Console.WriteLine("Felaktig inmatning. Välj ett nummer från listan.");
             }
         }
+
+        public static class EmployeeList
+        {
+
+            private static List<Employee> employees;
+
+            static EmployeeList()
+            {
+                employees = new List<Employee>
+                {
+                    new Employee("liam@myhotel.com", "admin123"),
+                    new Employee("william@myhotel.com","admin000"),
+                    new Employee("camilla@myhotel.com","admin999"),
+                };
+            }
+            public static bool Authenticate(string username, string password)
+            {
+                Employee employee = employees.Find(emp => emp.Username == username && emp.Password == password);
+                return employee != null;
+            }
+            
+    
+            public static void Login()
+            {
+                Console.WriteLine("Ange ditt användarnamn!");
+                string username = Console.ReadLine();
+
+                Console.WriteLine("Ange ditt läsenord!");
+                string password = Console.ReadLine();
+
+                if (Authenticate(username, password))
+                {
+                    Console.WriteLine($"Inloggningen lyckades, välkommen tillbaka {username}");
+                } 
+                else
+                {
+                    Console.WriteLine("Inloggningen misslyckades, försök igen senare");
+                }
+            }
+        }
     }
 }
+
