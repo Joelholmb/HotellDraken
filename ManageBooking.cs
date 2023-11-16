@@ -4,23 +4,21 @@ namespace hotelcsharp
     {   
         public static void CancelBooking()
         {
-            //kontrollerar om bokningen har avbokats
             bool isCancelled = false;
-            while (isCancelled == false)
+            while (!isCancelled)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ange bokningsnummer för det rum du vill avboka (eller 0 för att avsluta):");
                 Console.ResetColor();
 
+                // Lista alla bokade rum
                 RoomList.ListBookedRooms();
-                //Läser in användarens inmatning som en sträng även fast man skriver ett heltal eller sträng eller någon annan typ av data.
+
                 string userInput = Console.ReadLine();
-                // Försöker konvertera inmatningen till en integer(int)
                 if (int.TryParse(userInput, out int bookingNumber) && bookingNumber == 0)
                 {
                     break;
                 }
-                // Försöker avboka rummet och kontrollerar om det lyckades
                 else if (int.TryParse(userInput, out bookingNumber) && RoomList.CancelRoomBooking(bookingNumber))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -30,7 +28,7 @@ namespace hotelcsharp
                 }
                 else
                 {
-                    Console.WriteLine($"Ogiltigt bokningsnummer eller rummet är inte bokat. Försök igen.");
+                    Console.WriteLine("Ogiltigt bokningsnummer eller rummet är inte bokat. Försök igen.");
                 }
             }
         }

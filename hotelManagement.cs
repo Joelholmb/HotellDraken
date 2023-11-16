@@ -20,7 +20,6 @@ namespace hotelcsharp
                         Menu.ShowGuestMenu();
                         break;
                     case "A":
-                        EmployeeList.Login();
                         MenuEmployee.ShowEmployeeMenu();
                         break;
                     case "Q":
@@ -34,7 +33,7 @@ namespace hotelcsharp
         }
 
         // Metod för att låta användaren välja en gästprofil
-        private static void ChooseGuestProfile()
+        public static void ChooseGuestProfile()
         {
             Console.WriteLine("Välj vilken gästprofil du vill logga in med:");
             for (int i = 0; i < GuestList.guests.Count; i++)

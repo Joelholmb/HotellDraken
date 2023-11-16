@@ -83,37 +83,34 @@ namespace hotelcsharp
             int bookingNumber = int.Parse(Console.ReadLine());
 
             bool roomFound = false;
-
-            // loopar genom rummen för att hitta och checka in gästen
             foreach (var room in RoomList.rooms)
             {
                 if (room.BookingNumber == bookingNumber && room.IsBooked)
                 {
                     roomFound = true;
-                    
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Gäst har checkats in i rum {room.RoomName} med bokningsnummer {bookingNumber}.");
+                    Console.ResetColor();
                     break;
                 }
             }
-            // Meddelar om ingen giltig bokning hittades
+
             if (roomFound == false)
             {
                 Console.WriteLine("Ingen giltig bokning hittades för detta bokningsnummer.");
             }
         }
+
         // Metod för att checka ut en gäst
         public static void CheckOutGuest()
         {
             Console.Write("Ange bokningsnummer för utcheckning: ");
             int bookingNumber;
-            // Kontrollerar att inmatningen är en giltig int
             while (!int.TryParse(Console.ReadLine(), out bookingNumber))
             {
                 Console.Write("Felaktigt format, ange bokningsnummer igen: ");
             }
 
-            
-            // Itererar genom rummen för att hitta och checka ut gästen
             bool roomFound = false;
             foreach (var room in RoomList.rooms)
             {
@@ -121,19 +118,19 @@ namespace hotelcsharp
                 {
                     roomFound = true;
                     room.IsBooked = false;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"Gäst har checkats ut från rum {room.RoomName} med bokningsnummer {bookingNumber}.");
-                    
-                    //PromptGuestForReview(); ej i bruk tills review funkar
+                    Console.ResetColor();
                     break;
                 }
             }
-            // Meddelar om ingen giltig bokning hittades
+
             if (roomFound == false)
             {
                 Console.WriteLine("Ingen giltig bokning hittades för detta bokningsnummer.");
             }
-            
         }
+
         // private static void PromptGuestForReview() Vår reviewfunktion är inte aktiv än.
         // {
         //     Review1 makereview = new Review1();
