@@ -48,7 +48,8 @@ namespace hotelcsharp
         private static bool GetUserConfirmation()
         {
             Console.Write("\nVill du boka detta rum? (ja/nej): ");
-            return Console.ReadLine().Equals("ja", StringComparison.OrdinalIgnoreCase);
+            string userInput = Console.ReadLine()+"";
+            return userInput?.Equals("ja", StringComparison.OrdinalIgnoreCase) ?? false;
         }
         // Metod för att hantera bokningen av ett rum
         private static void ProcessBooking(int roomIndex)
