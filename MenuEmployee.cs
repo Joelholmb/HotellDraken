@@ -14,7 +14,7 @@ namespace hotelcsharp
                 Console.WriteLine("[4] Logga ut.");
                 Console.WriteLine("Ange ditt val: ");
 
-                string choice = Console.ReadLine();
+                string choice = Console.ReadLine()+"";
 
                 switch (choice)
                 {
@@ -79,7 +79,7 @@ namespace hotelcsharp
         public static void CheckInGuest()
         {
             Console.Write("Ange bokningsnummer för incheckning: ");
-            int bookingNumber = int.Parse(Console.ReadLine());
+            int bookingNumber = int.Parse(Console.ReadLine()+"");
 
             bool roomFound = false;
             foreach (var room in RoomList.rooms)
@@ -133,7 +133,7 @@ namespace hotelcsharp
         public static void PromptGuestForReview()
         {
             Console.WriteLine("Kära gäst! Vill du recensera din vistelse? (ja/nej): ");
-            string response = Console.ReadLine();
+            string response = Console.ReadLine()+"";
 
             if (response.Equals("ja", StringComparison.OrdinalIgnoreCase))
             {

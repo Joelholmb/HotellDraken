@@ -16,7 +16,7 @@ namespace hotelcsharp
                 // Lista alla bokade rum
                 RoomList.ListBookedRooms();
 
-                string userInput = Console.ReadLine();
+                string userInput = Console.ReadLine()+"";
                 if (int.TryParse(userInput, out int bookingNumber) && bookingNumber == 0)
                 {
                     break;

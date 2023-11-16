@@ -35,10 +35,10 @@ namespace hotelcsharp
         {
             Console.Clear();
             Console.WriteLine("Ange ditt användarnamn!");
-            string username = Console.ReadLine();
+            string username = Console.ReadLine()+"";
 
             Console.WriteLine("Ange ditt lösenord!");
-            string password = Console.ReadLine();
+            string password = Console.ReadLine()+"";
 
             if (EmployeeList.Authenticate(username, password))
             {

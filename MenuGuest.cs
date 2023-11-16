@@ -14,7 +14,7 @@ namespace hotelcsharp
                 Console.WriteLine("[4] Klar med bokning.");
                 Console.WriteLine("Ange ditt val: ");
 
-                string choice = Console.ReadLine();
+                string choice = Console.ReadLine()+"";
 
                 switch (choice)
                 {
