@@ -1,80 +1,107 @@
-namespace hotelcsharp
+using System;
+using System.Collections.Generic;
+
+class Program
 {
-    public class Review1
+    // Define a class for reviews
+    public class HotelReview
     {
-        public void R1()
+        public string UserName { get; set; }
+        public int Rating { get; set; }
+        public string Comment { get; set; }
+
+        public HotelReview(string userName, int rating, string comment)
         {
-            Console.WriteLine("1. Multiple choice");
-            Console.WriteLine("2. Free text");
-            Console.WriteLine("3. Number choice 1-10");
+            UserName = userName;
+            Rating = rating;
+            Comment = comment;
         }
 
-
-        class MultiChoice : Review1
+        public override string ToString()
         {
-            public int Option1 { get; set; }
-            public int Option2 { get; set; }
-            public int Option3 { get; set; }
-            public int Option4 { get; set; }
-            public int Option5 { get; set; }
-            public int Answer { get; set; }
-
-            public MultiChoice(string question, int option1, int option2, int option3, int option4, int option5, int answer)
-            {
-                Option1 = option1;
-                Option2 = option2;
-                Option3 = option3;
-                Option4 = option4;
-                Option5 = option5;
-                Answer = answer;
-            }
-
-            public void Review1UI()
-            {
-
-                Console.WriteLine($"Options: {Option1}, {Option2}, {Option3}, {Option4}, {Option5}");
-                Console.WriteLine($"Answer: {Answer}");
-                Console.WriteLine();
-            }
+            return $"User: {UserName}\nRating: {Rating}\nComment: {Comment}\n";
         }
+    }
 
-        static void Review1UI()
+    static void Main()
+    {
+        List<HotelReview> reviews = new List<HotelReview>();
+
+        bool keepRunning = true;
+
+        while (keepRunning)
         {
-            // Declare the list outside the method
-            List<Review1> Reviews = new List<Review1>();
+            Console.Clear();
+            Console.WriteLine("Hotel Review System");
+            Console.WriteLine("1. Write a Review");
+            Console.WriteLine("2. View Reviews");
+            Console.WriteLine("3. Exit");
 
-            // Instantiate the objects and add them to the list
-            Review1 a = new MultiChoice("MultiChoice Question", 1, 2, 3, 4, 5, 3);
-            Reviews.Add(a);
-            a = new MultiChoice("MultiChoice Question", 1, 2, 3, 4, 5, 3);
-            Reviews.Add(a);
-            a = new MultiChoice("MultiChoice Question", 1, 2, 3, 4, 5, 3);
-            Reviews.Add(a);
+            string choice = Console.ReadLine();
 
-            FreeText freeText1 = new FreeText("What can my company do to better serve your needs?", "Answer 1");
-            Reviews.Add(freeText1);
-
-            FreeText freeText2 = new FreeText("How satisfied are you with our products/services?", "Answer 2");
-            Reviews.Add(freeText2);
-
-            FreeText freeText3 = new FreeText("What value do we provide?", "Answer 3");
-            Reviews.Add(freeText3);
-
-            FreeText freeText4 = new FreeText("What do you like our hotel?", "Answer 4");
-            Reviews.Add(freeText4);
-
-            FreeText freeText5 = new FreeText("How is your stay?", "Answer 5");
-            Reviews.Add(freeText5);
-        }
-
-        class FreeText : Review1
-        {
-            public string Answer { get; set; }
-
-            public FreeText(string question, string answer)
+            switch (choice)
             {
-                Answer = answer;
+                case "1":
+                    LeaveReview(reviews);
+                    break;
+                case "2":
+                    ViewReviews(reviews);
+                    break;
+                case "3":
+                    keepRunning = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
             }
         }
+    }
+
+    static void LeaveReview(List<HotelReview> reviews)
+    {
+        Console.Clear();
+        Console.WriteLine("Write a Review");
+
+        Console.Write("Your Name: ");
+        string userName = Console.ReadLine();
+
+        Console.Write("Rating (1-5): ");
+        int rating;
+        while (!int.TryParse(Console.ReadLine(), out rating) || rating < 1 || rating > 5)
+        {
+            Console.WriteLine("Invalid input. Please enter a number between 1 and 5.");
+            Console.Write("Rating (1-5): ");
+        }
+
+        Console.Write("Comment: ");
+        string comment = Console.ReadLine();
+
+        HotelReview review = new HotelReview(userName, rating, comment);
+        reviews.Add(review);
+
+        Console.WriteLine("Thank you for your review!");
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
+    }
+
+    static void ViewReviews(List<HotelReview> reviews)
+    {
+        Console.Clear();
+        Console.WriteLine("Hotel Reviews");
+
+        if (reviews.Count == 0)
+        {
+            Console.WriteLine("No reviews available.");
+        }
+        else
+        {
+            foreach (HotelReview review in reviews)
+            {
+                Console.WriteLine(review);
+            }
+        }
+
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
     }
 }
