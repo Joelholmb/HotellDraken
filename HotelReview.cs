@@ -31,10 +31,10 @@ namespace hotelcsharp
              while (keepRunning)
              {
                  Console.Clear();
-                 Console.WriteLine("Hotel Review System");
-                 Console.WriteLine("1. Write a Review");
-                 Console.WriteLine("2. View Reviews");
-                 Console.WriteLine("3. Exit");
+                 Console.WriteLine("Vad kul! Gör nu ditt val.");
+                 Console.WriteLine("1. Skriv en recension");
+                 Console.WriteLine("2. Kolla vad du lämnat för recension");
+                 Console.WriteLine("3. Avsluta");
 
                  string choice = Console.ReadLine();
 
