@@ -6,8 +6,7 @@ namespace hotelcsharp
     {
         static void Main(string[] args)
         {
-            HotelManagement hotelManagement = new HotelManagement();
-            hotelManagement.Start();
+            HotelManagement.Start();
         }
     }
 }

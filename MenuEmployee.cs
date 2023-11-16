@@ -1,8 +1,8 @@
 namespace hotelcsharp
 {
-    class MenuEmployee
+    static class MenuEmployee
     {
-        public void ShowEmployeeMenu()
+        public static void ShowEmployeeMenu()
         {
             bool isRunning = true;
             while(isRunning)
@@ -20,18 +20,18 @@ namespace hotelcsharp
                 switch (choice)
                 {
                     case "1":
-                    ShowAvailableRooms(); 
+                        ShowAvailableRooms(); 
                         break;
                     case "2":
-                    ShowBookedRooms();
-                    CheckInGuest();
+                        ShowBookedRooms();
+                        CheckInGuest();
                         break;
                     case "3":
-
+                        // Logik för rum underhåll om vi hinner!
                         break;
                     case "4":
-                    ShowBookedRooms();
-                    CheckOutGuest();
+                        ShowBookedRooms();
+                        CheckOutGuest();
                         break;
                     case "5":
                         Console.WriteLine("Du är nu utloggad.");
@@ -43,7 +43,7 @@ namespace hotelcsharp
                 }
             }
         }
-        public void ShowBookedRooms()
+        public static void ShowBookedRooms()
         {
             Console.WriteLine("Lista över bokade rum:");
             foreach (var room in RoomList.rooms)
@@ -55,7 +55,7 @@ namespace hotelcsharp
             }
         }
 
-        public void ShowAvailableRooms()
+        public static void ShowAvailableRooms()
         {
             Console.WriteLine("Tillgängliga rum:");
             bool availableRoomFound = false;
@@ -77,7 +77,7 @@ namespace hotelcsharp
 
         }
         // Metod för att checka in en gäst
-        public void CheckInGuest()
+        public static void CheckInGuest()
         {
             Console.Write("Ange bokningsnummer för incheckning: ");
             int bookingNumber = int.Parse(Console.ReadLine());
@@ -102,7 +102,7 @@ namespace hotelcsharp
             }
         }
         // Metod för att checka ut en gäst
-        public void CheckOutGuest()
+        public static void CheckOutGuest()
         {
             Console.Write("Ange bokningsnummer för utcheckning: ");
             int bookingNumber;
@@ -123,7 +123,7 @@ namespace hotelcsharp
                     room.IsBooked = false;
                     Console.WriteLine($"Gäst har checkats ut från rum {room.RoomName} med bokningsnummer {bookingNumber}.");
                     
-                    PromptGuestForReview();
+                    //PromptGuestForReview(); ej i bruk tills review funkar
                     break;
                 }
             }
@@ -134,10 +134,10 @@ namespace hotelcsharp
             }
             
         }
-        private void PromptGuestForReview()
-        {
-            Review1 makereview = new Review1();
-            makereview.R1();
-        }
+        // private static void PromptGuestForReview() Vår reviewfunktion är inte aktiv än.
+        // {
+        //     Review1 makereview = new Review1();
+        //     makereview.R1();
+        // }
     }
 }

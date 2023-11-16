@@ -1,19 +1,10 @@
 namespace hotelcsharp
 {
-    public class HotelManagement
+    public static class HotelManagement
     {
-        private MenuEmployee menuEmployee;
-        private Menu menuGuest;
-
-        // Konstruktor för att initiera menyer för anställda och gäster
-        public HotelManagement()
-        {
-            menuEmployee = new MenuEmployee();
-            menuGuest = new Menu();
-        }
-
+       
         // Startmetoden som kör huvudmenyn för programmet
-        public void Start()
+        public static void Start()
         {
             while (true)
             {
@@ -25,10 +16,10 @@ namespace hotelcsharp
                 {
                     case "G":
                         ChooseGuestProfile();
-                        menuGuest.ShowGuestMenu();
+                        Menu.ShowGuestMenu();
                         break;
                     case "A":
-                        menuEmployee.ShowEmployeeMenu();
+                        MenuEmployee.ShowEmployeeMenu();
                         break;
                     case "Q":
                         Console.WriteLine("Avslutar programmet...");
@@ -41,7 +32,7 @@ namespace hotelcsharp
         }
 
         // Metod för att låta användaren välja en gästprofil
-        private void ChooseGuestProfile()
+        private static void ChooseGuestProfile()
         {
             Console.WriteLine("Välj vilken gästprofil du vill logga in med:");
             for (int i = 0; i < GuestList.guests.Count; i++)

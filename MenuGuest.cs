@@ -1,8 +1,8 @@
 namespace hotelcsharp
 {
-    class Menu
+    public static class Menu
     {
-        public void ShowGuestMenu()
+        public static void ShowGuestMenu()
         {
             bool isRunning = true;
             while(isRunning)
@@ -22,12 +22,10 @@ namespace hotelcsharp
                         ShowAvailableRooms();
                         break;
                     case "2":
-                        BookRoom bookRoom = new BookRoom();
-                        bookRoom.MakeBooking();
+                        BookRoom.MakeBooking();
                         break;
                     case "3":
-                        ManageBooking managebooking = new ManageBooking();
-                        managebooking.CancelBooking();
+                        ManageBooking.CancelBooking();
                         break;
                     case "4":
                         Console.WriteLine("\nHoppas vi syns snart!");
@@ -40,7 +38,7 @@ namespace hotelcsharp
             }
         }
 
-        public void ShowAvailableRooms()
+        public static void ShowAvailableRooms()
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Tillgängliga rum:");
