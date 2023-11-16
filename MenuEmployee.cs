@@ -121,6 +121,7 @@ namespace hotelcsharp
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"Gäst har checkats ut från rum {room.RoomName} med bokningsnummer {bookingNumber}.");
                     Console.ResetColor();
+                    PromptGuestForReview();
                     break;
                 }
             }
@@ -130,11 +131,15 @@ namespace hotelcsharp
                 Console.WriteLine("Ingen giltig bokning hittades för detta bokningsnummer.");
             }
         }
+        public static void PromptGuestForReview()
+        {
+            Console.WriteLine("Vill du lämna en recension? (ja/nej): ");
+            string response = Console.ReadLine();
 
-        // private static void PromptGuestForReview() Vår reviewfunktion är inte aktiv än.
-        // {
-        //     Review1 makereview = new Review1();
-        //     makereview.R1();
-        // }
+            if (response.Equals("ja", StringComparison.OrdinalIgnoreCase))
+            {
+                Review.ReviewMenu();
+            }
+        }
     }
 }
