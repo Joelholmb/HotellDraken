@@ -10,9 +10,8 @@ namespace hotelcsharp
                 Console.WriteLine("=========================");
                 Console.WriteLine("[1] Tillgängliga rum.");
                 Console.WriteLine("[2] Checka in gäst.");
-                Console.WriteLine("[3] Underhåll rum.");
-                Console.WriteLine("[4] Checka ut gäst");
-                Console.WriteLine("[5] Logga ut.");
+                Console.WriteLine("[3] Checka ut gäst");
+                Console.WriteLine("[4] Logga ut.");
                 Console.WriteLine("Ange ditt val: ");
 
                 string choice = Console.ReadLine();
@@ -20,20 +19,20 @@ namespace hotelcsharp
                 switch (choice)
                 {
                     case "1":
+                        Console.Clear();
                         ShowAvailableRooms(); 
                         break;
                     case "2":
+                        Console.Clear();
                         ShowBookedRooms();
                         CheckInGuest();
                         break;
                     case "3":
-                        // Logik för rum underhåll om vi hinner!
-                        break;
-                    case "4":
+                        Console.Clear();
                         ShowBookedRooms();
                         CheckOutGuest();
                         break;
-                    case "5":
+                    case "4":
                         Console.WriteLine("Du är nu utloggad.");
                         isRunning = false;
                         break;

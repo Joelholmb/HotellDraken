@@ -18,6 +18,7 @@ namespace hotelcsharp
         public static void ListAvailableRooms()
         {
             // Visa tillgängliga rum
+            Console.Clear();
             int index = 1;
             foreach (var room in rooms)
             {
@@ -32,6 +33,7 @@ namespace hotelcsharp
         public static void ShowInfoRoom(int roomIndex)
         {
             // Visa information om ett specifikt rum baserat på index
+            Console.Clear();
             if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
                 var selectedRoom = rooms[roomIndex - 1];

@@ -5,6 +5,7 @@ namespace hotelcsharp
         // Huvudmetod för att hantera rum-bokningsprocessen
         public static void MakeBooking()
         {
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Tillgängliga rum:");
             Console.ResetColor();
@@ -19,6 +20,7 @@ namespace hotelcsharp
             }
             else
             {
+                Console.Clear();
                 RoomList.ShowInfoRoom(roomIndex);
                 // Begär bekräftelse från användaren innan bokningen fortsätter
                 if (GetUserConfirmation())
@@ -52,6 +54,7 @@ namespace hotelcsharp
         private static void ProcessBooking(int roomIndex)
         {
             // Hämta tillgängliga bokningsintervall för rummet
+            Console.Clear();
             var availableIntervals = RoomList.GetAvailableWeekIntervals(roomIndex, 4);
             Console.WriteLine("\nVälj ett bokningsintervall från följande tillgängliga tider:");
             for (int i = 0; i < availableIntervals.Count; i++)

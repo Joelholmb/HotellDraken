@@ -5,6 +5,7 @@ namespace hotelcsharp
         // Metod för att låta användaren välja en gästprofil
         public static void ChooseGuestProfile()
         {
+            Console.Clear();
             Console.WriteLine("Välj vilken gästprofil du vill logga in med:");
             for (int i = 0; i < GuestList.guests.Count; i++)
             {
@@ -18,6 +19,7 @@ namespace hotelcsharp
             // Validerar valet och hälsar den valda gästen
             if (selectedGuestIndex > 0 && selectedGuestIndex <= GuestList.guests.Count)
             {
+                Console.Clear();
                 Guest chosenGuest = GuestList.guests[selectedGuestIndex - 1];
                 Console.WriteLine($"Välkommen {chosenGuest.Name}.");
                 
@@ -31,6 +33,7 @@ namespace hotelcsharp
             // Metod för att logga in anställda och visa anställdas meny
         public static void LoginEmployee()
         {
+            Console.Clear();
             Console.WriteLine("Ange ditt användarnamn!");
             string username = Console.ReadLine();
 
@@ -39,6 +42,7 @@ namespace hotelcsharp
 
             if (EmployeeList.Authenticate(username, password))
             {
+                Console.Clear();
                 Console.WriteLine($"Inloggningen lyckades, välkommen tillbaka {username}");
                 MenuEmployee.ShowEmployeeMenu();  // Visa anställdas meny
             }
