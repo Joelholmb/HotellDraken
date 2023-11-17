@@ -10,7 +10,7 @@ namespace hotelcsharp
             while (true)
             {
                 Console.WriteLine("\nÄr du en gäst eller en anställd? (G/A)\nTryck på 'Q' för att avsluta");
-                string input = Console.ReadLine().ToUpper();
+                string input = Console.ReadLine()+"".ToUpper();
 
                 switch (input)
                 {
