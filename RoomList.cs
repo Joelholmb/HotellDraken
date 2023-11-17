@@ -9,23 +9,19 @@ namespace hotelcsharp
             // Initialisera rummen med förinställda värden
             rooms = new List<Rooms>
             {
-                new Rooms("Lancelot", "Superior-rum", "2 enkelsängar", "26 kvadratmeter", "en betongvägg", "3700 kr"),
-                new Rooms("Merlin", "Premium-rum", "1 queen-size säng", "36 kvadratmeter", "staden", "5000 kr"),
-                new Rooms("Arthur", "Svit", "1 kingsize-säng", "49 kvadratmeter", "havet", "12000 kr"),
+                new Rooms(1,"Lancelot", "Superior-rum", "2 enkelsängar", "26 kvadratmeter", "en betongvägg", "3700 kr"),
+                new Rooms(2,"Merlin", "Premium-rum", "1 queen-size säng", "36 kvadratmeter", "staden", "5000 kr"),
+                new Rooms(3,"Arthur", "Svit", "1 kingsize-säng", "49 kvadratmeter", "havet", "12000 kr"),
             };
         }
 
         public static void ListAvailableRooms()
         {
-            // Visa tillgängliga rum
-            Console.Clear();
-            int index = 1;
             foreach (var room in rooms)
             {
                 if (room.IsBooked == false)
                 {
-                    Console.WriteLine($"{index}. {room.RoomName}, {room.RoomType}. Pris för en natt {room.RoomPrice}.");
-                    index++;
+                    Console.WriteLine($"{room.RoomId}. {room.RoomName}, {room.RoomType}. Pris för en natt {room.RoomPrice}.");
                 }
             }
         }
