@@ -33,6 +33,7 @@ namespace hotelcsharp
                         CheckOutGuest();
                         break;
                     case "4":
+                        Console.Clear();
                         Console.WriteLine("Du är nu utloggad.");
                         isRunning = false;
                         break;
