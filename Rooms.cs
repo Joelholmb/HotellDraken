@@ -6,7 +6,7 @@ namespace hotelcsharp
     {
         private static int nextBookingNumber = 1;
         // En statisk variabel som håller koll på nästa tillgängliga bokningsnummer
-
+        public int RoomId { get; private set; }
         public string RoomName { get; set; }
         public string RoomType { get; set; }
         public int BookingNumber { get; set; }
@@ -19,8 +19,9 @@ namespace hotelcsharp
         // En lista som innehåller datumintervall när rummet är bokat
         
 
-        public Rooms(string roomname, string roomtype,string typebed, string roomsize, string roomview, string roomprice)
+        public Rooms(int roomid, string roomname, string roomtype,string typebed, string roomsize, string roomview, string roomprice)
         {
+            RoomId = roomid;
             RoomName = roomname;
             RoomType = roomtype;
             RoomPrice = roomprice;
