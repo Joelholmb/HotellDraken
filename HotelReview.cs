@@ -36,7 +36,7 @@ namespace hotelcsharp
                  Console.WriteLine("2. Kolla vad du lämnat för recension tidigare.");
                  Console.WriteLine("3. Avsluta.");
 
-                 string choice = Console.ReadLine();
+                 string choice = Console.ReadLine()+"";
 
                  switch (choice)
                  {
@@ -62,7 +62,7 @@ namespace hotelcsharp
             Console.WriteLine("Skriv en recension");
 
             Console.Write("Namn: ");
-            string userName = Console.ReadLine();
+            string userName = Console.ReadLine()+"";
 
             Console.Write("Rating (1-5): ");
             int rating;
@@ -73,7 +73,7 @@ namespace hotelcsharp
             }
 
             Console.Write("Kommentar: ");
-            string comment = Console.ReadLine();
+            string comment = Console.ReadLine()+"";
 
             HotelReview review = new HotelReview(userName, rating, comment);
             reviews.Add(review);
