@@ -36,14 +36,29 @@ namespace hotelcsharp
             while (true)
             {
                 Console.WriteLine("\nAnge numret på det rum du vill boka [1-3] eller 0 för att avbryta:");
-                if (int.TryParse(Console.ReadLine(), out int roomIndex) && 
-                    (roomIndex == 0 || (roomIndex > 0 && roomIndex <= RoomList.rooms.Count)))
+                if (int.TryParse(Console.ReadLine(), out int roomId) && roomId == 0)
                 {
-                    return roomIndex;
+                    return 0;
                 }
-                Console.WriteLine("Ogiltigt val. Försök igen.");
+                else if (roomId > 0)
+                {
+                    var roomToBook = RoomList.rooms.FirstOrDefault(r => r.RoomId == roomId);
+                    if (roomToBook != null && roomToBook.IsBooked == false)
+                    {
+                        return roomToBook.RoomId;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Rummet är antingen redan bokat eller finns inte. Försök igen.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ogiltigt val. Försök igen.");
+                }
             }
         }
+
         // Metod för att bekräfta användarens val
         private static bool GetUserConfirmation()
         {
