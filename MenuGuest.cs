@@ -40,6 +40,7 @@ namespace hotelcsharp
 
         public static void ShowAvailableRooms()
         {
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Tillgängliga rum:");
             Console.ResetColor();
@@ -47,6 +48,7 @@ namespace hotelcsharp
             RoomList.ListAvailableRooms();
             Console.WriteLine("Tryck på valfri tangent för att återgå till menyn...");
             Console.ReadKey();
+            Console.Clear();     
         }
     }
 }
