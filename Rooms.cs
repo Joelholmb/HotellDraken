@@ -39,6 +39,7 @@ namespace hotelcsharp
 
             IsBooked = true;
             BookingNumber = nextBookingNumber++;
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\n-------------------------------------------------");
             Console.WriteLine($"Bokningsbekräftelse för Hotell Draken. \nRum {RoomName} har bokats.");
@@ -46,6 +47,10 @@ namespace hotelcsharp
             Console.WriteLine($"Bokningsdatum: {startDate.ToShortDateString()} till {endDate.ToShortDateString()}");
             Console.WriteLine("-------------------------------------------------");
             Console.ResetColor();
+            
+            Console.WriteLine("\nTryck på valfri tangent för att fortsätta till menyn...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         public void CancelBooking()
