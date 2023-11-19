@@ -2,104 +2,126 @@ namespace hotelcsharp
 {
     public static class BookRoom
     {
-        // Huvudmetod för att hantera rum-bokningsprocessen
         public static void MakeBooking()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("Tillgängliga rum:");
-            Console.ResetColor();
-
             RoomList.ListAvailableRooms();
-            // Få användarens val av rum
-            int roomIndex = GetRoomChoice();
+            int roomId = GetRoomChoice();
 
-            if (roomIndex == 0) 
+            if (roomId != 0)
             {
-                Console.WriteLine("Bokning avbruten.");
+                BookSelectedRoom(roomId);
             }
             else
             {
                 Console.Clear();
-                RoomList.ShowInfoRoom(roomIndex);
-                // Begär bekräftelse från användaren innan bokningen fortsätter
-                if (GetUserConfirmation())
-                {
-                    // Hanterar bokningsprocessen baserat på användarens val
-                    ProcessBooking(roomIndex);
-                }
-            }
-        }
-        // Metod för att få användarens rumval
-        private static int GetRoomChoice()
-        {
-            while (true)
-            {
-                Console.WriteLine("\nAnge numret på det rum du vill boka [1-3] eller 0 för att avbryta:");
-                if (int.TryParse(Console.ReadLine(), out int roomId) && roomId == 0)
-                {
-                    return 0;
-                }
-                else if (roomId > 0)
-                {
-                    var roomToBook = RoomList.rooms.FirstOrDefault(r => r.RoomId == roomId);
-                    if (roomToBook != null && roomToBook.IsBooked == false)
-                    {
-                        return roomToBook.RoomId;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Rummet är antingen redan bokat eller finns inte. Försök igen.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Ogiltigt val. Försök igen.");
-                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Bokning avbruten.");
+                Console.ResetColor();
             }
         }
 
-        // Metod för att bekräfta användarens val
-        private static bool GetUserConfirmation()
+        private static int GetRoomChoice()
         {
-            Console.Write("\nVill du boka detta rum? (ja/nej): ");
-            string userInput = Console.ReadLine()+"";
-            return userInput?.Equals("ja", StringComparison.OrdinalIgnoreCase) ?? false;
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\nAnge numret på det rum du vill boka eller 0 för att avbryta:");
+            Console.ResetColor();
+            int.TryParse(Console.ReadLine(), out int roomId);
+            return roomId;
         }
-        // Metod för att hantera bokningen av ett rum
-        private static void ProcessBooking(int roomIndex)
+
+        private static void BookSelectedRoom(int roomId)
         {
-            // Hämta tillgängliga bokningsintervall för rummet
             Console.Clear();
-            var availableIntervals = RoomList.GetAvailableWeekIntervals(roomIndex, 4);
-            Console.WriteLine("\nVälj ett bokningsintervall från följande tillgängliga tider:");
-            for (int i = 0; i < availableIntervals.Count; i++)
+            RoomList.ShowInfoRoom(roomId);
+
+            if (!GetUserConfirmation())
             {
-                Console.WriteLine($"{i + 1}. {availableIntervals[i].Item1.ToShortDateString()} till {availableIntervals[i].Item2.ToShortDateString()}");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Bokningen avbruten.");
+                Console.ResetColor();
+                return;
             }
-            // Få användarens val av bokningsintervall
-            int intervalChoice = GetIntervalChoice(availableIntervals.Count);
-            var chosenInterval = availableIntervals[intervalChoice - 1];
-            // Försök att boka rummet och meddela användaren om utfallet
-            if (RoomList.BookRoom(roomIndex, chosenInterval.Item1, chosenInterval.Item2))
+
+            var availableIntervals = RoomList.GetAvailableWeekIntervals(roomId, 4);
+            if (availableIntervals.Count == 0)
             {
-                Console.WriteLine($"Rum {RoomList.rooms[roomIndex - 1].RoomName} bokat från {chosenInterval.Item1.ToShortDateString()} till {chosenInterval.Item2.ToShortDateString()}.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Inga tillgängliga tidsintervall för detta rum.");
+                Console.ResetColor();
+                return;
+            }
+
+            Console.Clear();
+            ShowAvailableIntervals(availableIntervals);
+            int intervalChoice = GetIntervalChoice(availableIntervals);
+
+            if (intervalChoice == 0)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Bokningen avbruten.");
+                Console.ResetColor();
+                return;
+            }
+
+            var chosenInterval = availableIntervals[intervalChoice - 1];
+            if (RoomList.BookRoom(roomId, chosenInterval.start, chosenInterval.end))
+            {
+               
+                Console.WriteLine(" ");
+                
             }
             else
             {
-                Console.WriteLine("Bokningen kunde inte genomföras.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Det gick inte att boka rummet.");
+                Console.ResetColor();
             }
         }
-        // Metod för att få användarens val av bokningsintervall
-        private static int GetIntervalChoice(int count)
+
+        private static void ShowAvailableIntervals(List<(DateTime start, DateTime end)> intervals)
+        {   
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\nTillgängliga tidsintervaller:");
+            Console.ResetColor();
+            for (int i = 0; i < intervals.Count; i++)
+            {
+                var interval = intervals[i];
+                Console.WriteLine($"{i + 1}. Från {interval.start.ToShortDateString()} till {interval.end.ToShortDateString()}");
+            }
+        }
+
+        private static int GetIntervalChoice(List<(DateTime start, DateTime end)> intervals)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\nAnge numret på det tidsintervall du vill boka eller 0 för att avbryta:");
+            Console.ResetColor();
             while (true)
             {
-                if (int.TryParse(Console.ReadLine(), out int intervalChoice) && intervalChoice >= 1 && intervalChoice <= count)
+                if (int.TryParse(Console.ReadLine(), out int choice))
                 {
-                    return intervalChoice;
+                    if (choice == 0) 
+                    {
+                        return 0;
+                    }
+                    else if (choice > 0 && choice <= intervals.Count)
+                    {
+                        return choice;
+                    }
                 }
-            } 
+
+                Console.WriteLine($"Ogiltigt val. Ange ett nummer mellan 1 och {intervals.Count}, eller 0 för att avbryta:");
+            }
+        }
+
+        private static bool GetUserConfirmation()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("\nVill du boka detta rum? (ja/nej): ");
+            Console.ResetColor();
+            return Console.ReadLine().Trim().Equals("ja", StringComparison.OrdinalIgnoreCase);
         }
     }
 }
