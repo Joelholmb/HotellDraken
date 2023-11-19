@@ -7,6 +7,7 @@ namespace hotelcsharp
             bool isRunning = true;
             while(isRunning)
             {
+                Console.Clear();
                 Console.WriteLine("=========================");
                 Console.WriteLine("[1] Tillgängliga rum.");
                 Console.WriteLine("[2] Checka in gäst.");
@@ -19,7 +20,6 @@ namespace hotelcsharp
                 switch (choice)
                 {
                     case "1":
-                        Console.Clear();
                         ShowAvailableRooms(); 
                         break;
                     case "2":
@@ -34,18 +34,27 @@ namespace hotelcsharp
                         break;
                     case "4":
                         Console.Clear();
-                        Console.WriteLine("Du är nu utloggad.");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("===========================");
+                        Console.WriteLine("Du har blivit utloggad.");
+                        Console.WriteLine("===========================");
+                        Console.ResetColor();
                         isRunning = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltigt val, försök igen.");
+                        Console.ResetColor();
+                        Console.ReadKey();
                         break;
                 }
             }
         }
         public static void ShowBookedRooms()
         {
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Lista över bokade rum:");
+            Console.ResetColor();
             foreach (var room in RoomList.rooms)
             {
                 if (room.IsBooked)
@@ -57,9 +66,18 @@ namespace hotelcsharp
 
         public static void ShowAvailableRooms()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Tillgängliga rum:");
+            Console.ResetColor();
+            
+            RoomList.ListAvailableRooms();
+            Console.WriteLine("Tryck på valfri tangent för att återgå till menyn...");
+            Console.ReadKey();
+            Console.Clear();     
+        
+            
             bool availableRoomFound = false;
-
             // loopar genom rummen för att hitta lediga rum
             foreach (var room in RoomList.rooms)
             {
@@ -128,12 +146,18 @@ namespace hotelcsharp
 
             if (roomFound == false)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ingen giltig bokning hittades för detta bokningsnummer.");
+                Console.ResetColor();
             }
         }
         public static void PromptGuestForReview()
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("\n========================================================");
             Console.WriteLine("Kära gäst! Vill du recensera din vistelse? (ja/nej): ");
+            Console.WriteLine("========================================================");
+            Console.ResetColor();
             string response = Console.ReadLine()+"";
 
             if (response.Equals("ja", StringComparison.OrdinalIgnoreCase))

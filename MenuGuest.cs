@@ -28,11 +28,19 @@ namespace hotelcsharp
                         ManageBooking.CancelBooking();
                         break;
                     case "4":
-                        Console.WriteLine("\nHoppas vi syns snart!");
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("===========================");
+                        Console.WriteLine("Hoppas vi syns snart igen!");
+                        Console.WriteLine("===========================");
                         isRunning = false;
+                        Console.ResetColor();
                         break;
                     default:
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltigt val, försök igen.");
+                        Console.ResetColor();
                         break;
                 }
             }

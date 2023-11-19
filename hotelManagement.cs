@@ -21,12 +21,16 @@ namespace hotelcsharp
             {
                 Console.Clear();
                 Guest chosenGuest = GuestList.guests[selectedGuestIndex - 1];
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"Välkommen {chosenGuest.Name}.");
+                Console.ResetColor();
                 
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Felaktig inmatning. Välj ett nummer från listan.");
+                Console.ResetColor();
             }
         }
 
@@ -35,20 +39,29 @@ namespace hotelcsharp
         {
             Console.Clear();
             Console.WriteLine("Ange ditt användarnamn!");
-            string username = Console.ReadLine()+"";
+            string username = Console.ReadLine();
 
             Console.WriteLine("Ange ditt lösenord!");
-            string password = Console.ReadLine()+"";
+            string password = Console.ReadLine();
 
             if (EmployeeList.Authenticate(username, password))
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"Inloggningen lyckades, välkommen tillbaka {username}");
+                Console.ResetColor();
+
+                // Lägg till en paus för att låta användaren se inloggningsmeddelandet
+                Console.WriteLine("\nTryck på valfri tangent för att fortsätta till menyn...");
+                Console.ReadKey();
+
                 MenuEmployee.ShowEmployeeMenu();  // Visa anställdas meny
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Inloggningen misslyckades, försök igen.");
+                Console.ResetColor();
             }
         }
     }
