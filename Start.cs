@@ -24,7 +24,6 @@ namespace hotelcsharp
                         HotelManagement.LoginEmployee();
                         break;
                     case "Q":
-                        Console.WriteLine("Klicka valfri tangent för att avsluta");
                         return;
                     default:
                         Console.WriteLine("Felaktig inmatning. Välj antingen G, A eller Q.");
