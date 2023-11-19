@@ -33,7 +33,7 @@ namespace hotelcsharp
             if (roomIndex > 0 && roomIndex <= rooms.Count)
             {
                 var selectedRoom = rooms[roomIndex - 1];
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine($"\nInformation för rummet {selectedRoom.RoomName}:");
                 Console.ResetColor();
                 Console.WriteLine($"{selectedRoom.RoomType}");
@@ -44,7 +44,7 @@ namespace hotelcsharp
             }
             else
             {
-                Console.WriteLine("Ogiltigt rumindex.");
+                Console.WriteLine("Ogiltigt val.");
             }
         }
 
