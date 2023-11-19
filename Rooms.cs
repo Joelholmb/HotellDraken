@@ -1,7 +1,5 @@
 namespace hotelcsharp
 {
-
-
     public class Rooms
     {
         private static int nextBookingNumber = 1;
@@ -9,99 +7,59 @@ namespace hotelcsharp
         public int RoomId { get; private set; }
         public string RoomName { get; set; }
         public string RoomType { get; set; }
-        public int BookingNumber { get; set; }
+        public int BookingNumber { get; private set; }
         public string TypeBed { get; set; }
         public string RoomPrice { get; set; }
         public string RoomSize { get; set; }
-        public string RoomView {get; set; }
+        public string RoomView { get; set; }
         public bool IsBooked { get; set; }
-        public List<(DateTime start, DateTime end)> BookedPeriods { get; private set; }
-        // En lista som innehåller datumintervall när rummet är bokat
-        
 
-        public Rooms(int roomid, string roomname, string roomtype,string typebed, string roomsize, string roomview, string roomprice)
+        public Rooms(int roomId, string roomName, string roomType, string typeBed,string roomSize, string roomView, string roomPrice)
         {
-            RoomId = roomid;
-            RoomName = roomname;
-            RoomType = roomtype;
-            RoomPrice = roomprice;
-            TypeBed = typebed;
-            RoomSize = roomsize;
-            RoomView = roomview;
+            RoomId = roomId;
+            RoomName = roomName;
+            RoomType = roomType;
+            TypeBed = typeBed;
+            RoomSize = roomSize;
+            RoomView = roomView;
+            RoomPrice = roomPrice;
             IsBooked = false;
-            BookedPeriods = new List<(DateTime start, DateTime end)>();
-            
         }
-        // Metod för att boka rummet. Sätter IsBooked till true och tilldelar ett bokningsnummer
-        public void Book(DateTime startDate, DateTime endDate)
+
+        public void Book()
         {
-            foreach (var period in BookedPeriods)
+            if (IsBooked)
             {
-                if (startDate < period.end && endDate > period.start)
-                {
-                    Console.WriteLine("Detta datumintervall är redan bokat.");
-                    return;
-                }
+                Console.WriteLine("Rummet är redan bokat.");
+                return;
             }
 
-            BookedPeriods.Add((startDate, endDate));
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = startDate.AddDays(7);
+
             IsBooked = true;
             BookingNumber = nextBookingNumber++;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\n--------------------------");
+            Console.WriteLine("\n-------------------------------------------------");
+            Console.WriteLine($"Bokningsbekräftelse för Hotell Draken. \nRum {RoomName} har bokats.");
             Console.WriteLine($"Ditt bokningsnummer är: {BookingNumber}.");
-            Console.WriteLine("--------------------------");
+            Console.WriteLine($"Bokningsdatum: {startDate.ToShortDateString()} till {endDate.ToShortDateString()}");
+            Console.WriteLine("-------------------------------------------------");
             Console.ResetColor();
-            
         }
-        // Metod för att avboka rummet. Återställer IsBooked till false
+
         public void CancelBooking()
         {
-            // Kontrollera om det finns bokade intervaller
-            if (IsBooked && BookedPeriods.Count > 0)
+            if (IsBooked)
             {
-                BookedPeriods.Clear(); // Rensa listan över bokade intervaller
-                IsBooked = false; // Markera rummet som ej bokat
+                IsBooked = false;
+                Console.WriteLine("Bokningen har avbokats.");
             }
         }
-        //Metod för att kolla nör rum är lediga
+
         public void ShowAvailability()
         {
-            
-            Console.WriteLine($"Tillgänglighet för {RoomName}:");
-
-            // Definierar startdatumet för tillgänglighetskontrollen, vilket är dagens datum
-            DateTime checkDate = DateTime.Now;
-            // Definierar slutdatumet för tillgänglighetskontrollen, vilket är en månad från dagens datum
-            DateTime endDate = DateTime.Now.AddMonths(1); 
-
-            // En while-loop som kör tills checkDate når endDate
-            while (checkDate < endDate)
-            {
-                // rummet är tillgängligt från början
-                bool isAvailable = true;
-                
-                // Går igenom varje bokningsperiod för rummet
-                foreach (var period in BookedPeriods)
-                {
-                    // Kontrollerar om checkDate faller inom någon bokad period
-                    if (checkDate >= period.start && checkDate < period.end)
-                    {
-                        // Om det gör det, är rummet inte tillgängligt den dagen
-                        isAvailable = false;
-                        break;
-                    }
-                }
-
-                // Om rummet är tillgängligt, då skrivs det datumet ut som tillgängligt
-                if (isAvailable)
-                {
-                    Console.WriteLine($"{checkDate.ToShortDateString()} - Tillgänglig");
-                }
-                // Går vidare till nästa dag
-                checkDate = checkDate.AddDays(1);
-            }
+            Console.WriteLine($"Tillgänglighet för {RoomName}: {(IsBooked ? "Bokat" : "Ledigt")}");
         }
     }
 }
-  
